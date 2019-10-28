@@ -1,0 +1,9 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="97.6842" height="512" transform="matrix(-1 0 0 1 512 0)" fill="#06B173"/>
+<rect width="97.6842" height="512" transform="matrix(-1 0 0 1 305.404 0)" fill="#06B173"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M512 0L414.426 300.416L414.316 249.677L414.38 249.515V249.632L512 0Z" fill="#039D66"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M305.404 0L207.83 301.224L207.719 250.348L207.783 250.186V250.303L305.404 0Z" fill="#039D66"/>
+<path d="M512 0H402.742L207.719 512H316.231L512 0Z" fill="#09E589"/>
+<path d="M305.404 0H195.743L0 512H108.912L305.404 0Z" fill="#09E589"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M305.404 255.256L207.719 512L305.295 201.489L305.404 255.256Z" fill="#039D66"/>
+</svg>

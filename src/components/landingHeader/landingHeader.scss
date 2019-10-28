@@ -1,0 +1,14 @@
+@import "../../styles/variables";
+
+.carousel-inner {
+  font-family: "Roboto", sans-serif;
+  p {
+    font-weight: 300;
+  }
+  img {
+    filter: brightness(50%);
+    @media (min-width: 1200px) {
+      height: 100vh;
+    }
+  }
+}

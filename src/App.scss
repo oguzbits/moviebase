@@ -1,0 +1,72 @@
+html {
+  box-sizing: border-box;
+  font-size: 14px;
+  background-color: rgb(27, 27, 27);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  font-size: 12px;
+}
+@media (min-width: 376px) {
+  html {
+    font-size: 14px;
+  }
+}
+@media (min-width: 426px) {
+  html {
+    font-size: 16px;
+  }
+}
+// @media (min-width: 769px) {
+//   html {
+//     font-size: 18px;
+//   }
+// }
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 100;
+  src: local("Roboto Thin"), local("Roboto-Thin"),
+    url("./fonts/roboto-100.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 300;
+  src: local("Roboto Light"), local("Roboto-Light"),
+    url("./fonts/roboto-300.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Roboto"), local("Roboto-Regular"),
+    url("./fonts/roboto-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Roboto";
+  font-style: normal;
+  font-weight: 900;
+  src: local("Roboto Black"), local("Roboto-Black"),
+    url("./fonts/roboto-900.woff2") format("woff2");
+}
