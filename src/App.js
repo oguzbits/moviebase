@@ -38,7 +38,6 @@ const App = props => {
       <div className="App">
         <NavBar />
         <Route path="/" exact component={LandingPage} />
-        {/* <Route path="/tvshows" exact component={LandingPage} /> */}
         {/* <Route path="/movie" component={MoviePage} /> */}
         {/* <Route path="/tvshows" component={TvPage} /> */}
         <Route path="/discover" component={Discover} />
