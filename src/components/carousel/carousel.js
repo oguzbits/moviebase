@@ -45,7 +45,7 @@ const Carousel = props => {
     ]
   };
 
-  const config = props.MDBConfig;
+  const config = props.MDBConfig.images;
 
   return (
     <div className="carousel-main">
@@ -63,9 +63,9 @@ const Carousel = props => {
               <div className="card">
                 <img
                   src={`${
-                    config.images
-                      ? config.images.secure_base_url +
-                        config.images.poster_sizes[2] +
+                    config
+                      ? config.secure_base_url +
+                        config.poster_sizes[2] +
                         item.poster_path
                       : ""
                   }`}

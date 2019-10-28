@@ -1,9 +1,9 @@
 import React from "react";
 // import { Link } from "react-router-dom";
 
-import "./movieDetailsHeader.scss";
+import "./itemDetailsHeader.scss";
 
-const MovieDetailsHeader = props => {
+const ItemDetailsHeader = props => {
   //   const handleGetGenre = genreId => {
   //     let mainGenre;
   //     if (props.movieGenres) {
@@ -16,16 +16,16 @@ const MovieDetailsHeader = props => {
   //     }
   //   };
 
-  const config = props.MDBConfig;
+  const config = props.MDBConfig.images;
 
   return (
     <div className="carousel-inner">
       <div className="carousel-item active">
         <img
           src={
-            config.images
-              ? config.images.secure_base_url +
-                config.images.backdrop_sizes[2] +
+            config
+              ? config.secure_base_url +
+                config.backdrop_sizes[2] +
                 props.details.backdrop_path
               : ""
           }
@@ -33,7 +33,7 @@ const MovieDetailsHeader = props => {
           alt=""
         />
         <div className="carousel-caption">
-          <h2>{props.title}</h2>
+          <h2>{props.details.name || props.details.title}</h2>
           <p>
             {/* {handleGetGenre(item.genre_ids)} | {item.vote_average}{" "} */}
             <i className="fas fa-star" />
@@ -44,4 +44,4 @@ const MovieDetailsHeader = props => {
   );
 };
 
-export default MovieDetailsHeader;
+export default ItemDetailsHeader;

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import moment from "moment";
 
+import setItemType from "../../actions/setItemType";
 import getDiscover from "../../actions/getDiscover";
 
 import Popularity from "../../components/discoverForms/popularity";
@@ -14,7 +15,6 @@ import "./discover.scss";
 const Discover = props => {
   const currentYear = new Date().getFullYear();
 
-  const [type, setType] = useState("movie");
   const [sortBy, setSortBy] = useState("popularity.desc");
   const [genres, setGenres] = useState([]);
   const [keywords, setKeywords] = useState([]);
@@ -23,13 +23,15 @@ const Discover = props => {
 
   const handleGetDiscover = () => {
     props.getDiscover(
-      `https://api.themoviedb.org/3/discover/${type}?api_key=${
+      `https://api.themoviedb.org/3/discover/${props.itemType.toLowerCase()}?api_key=${
         props.apiKey
       }&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false
      &page=${page}&with_genres=${genres}${
         keywords ? `&with_keywords=${keywords}` : ""
       }${
-        type === "movie" ? "&primary_release_year=" : "&first_air_date_year="
+        props.itemType === "movie"
+          ? "&primary_release_year="
+          : "&first_air_date_year="
       }${year}`
     );
   };
@@ -46,7 +48,7 @@ const Discover = props => {
 
   useEffect(() => {
     handleGetDiscover();
-  }, [props.apiKey, type, sortBy, genres, keywords, year, page]);
+  }, [props.apiKey, props.itemType, sortBy, genres, keywords, year, page]);
 
   const getDateArray = (start, end) => {
     let arr = [],
@@ -60,12 +62,11 @@ const Discover = props => {
 
   const yearList = [...getDateArray(1900, currentYear), "None"];
 
-  const config = props.MDBConfig;
+  const config = props.MDBConfig.images;
   const imageSource = item => {
-    return config.images
-      ? config.images.secure_base_url +
-          config.images.poster_sizes[0] +
-          item.poster_path || item.backdrop_path
+    return config
+      ? config.secure_base_url + config.poster_sizes[0] + item.poster_path ||
+          item.backdrop_path
       : "";
   };
   return (
@@ -77,10 +78,10 @@ const Discover = props => {
           <h3
             id="header-movies"
             style={{
-              textDecoration: type === "movie" ? "underline" : ""
+              textDecoration: props.itemType === "TV" ? "" : "underline"
             }}
             onClick={() => {
-              setType("movie");
+              props.setItemType("MOVIE");
               setPage(1);
             }}>
             Movies
@@ -88,10 +89,10 @@ const Discover = props => {
           <h3
             id="header-tvshows"
             style={{
-              textDecoration: type === "tv" ? "underline" : ""
+              textDecoration: props.itemType === "TV" ? "underline" : ""
             }}
             onClick={() => {
-              setType("tv");
+              props.setItemType("TV");
               setPage(1);
             }}>
             TV Shows
@@ -146,7 +147,11 @@ const Discover = props => {
                 onChange={e => setGenres(e.target.value)}
                 placeholder="Filter by genres...">
                 <GenreList
-                  Genres={type === "movie" ? props.movieGenres : props.TVGenres}
+                  Genres={
+                    props.itemType === "movie"
+                      ? props.movieGenres
+                      : props.TVGenres
+                  }
                 />
               </select>
             </div>
@@ -174,7 +179,11 @@ const Discover = props => {
               item =>
                 imageSource(item) &&
                 item.overview && (
-                  <div key={item.id} id="card-container" className="card">
+                  <Link
+                    to={`/details/${props.itemType.toLowerCase()}/${item.id}`}
+                    key={item.id}
+                    id="card-container"
+                    className="card">
                     <div id="card-grid">
                       <div className="card">
                         <img
@@ -215,7 +224,7 @@ const Discover = props => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 )
             )
           ) : (
@@ -236,9 +245,12 @@ const Discover = props => {
     </div>
   );
 };
+
 const mapStateToProps = state => ({
   apiKey: state.PostMDBConfig.apiKey,
   MDBConfig: state.PostMDBConfig,
+
+  itemType: state.setItemType.itemType,
 
   movieGenres: state.postMovieGenres.genres,
   TVGenres: state.postTVGenres.genres,
@@ -246,6 +258,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  setItemType: type => dispatch(setItemType(type)),
+
   getDiscover: url => dispatch(getDiscover(url))
 });
 

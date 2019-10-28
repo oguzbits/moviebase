@@ -9,11 +9,8 @@ import postTVGenres from "./actions/TVActions/postTVGenres";
 import ScrollToTop from "./components/scrollToTop/scrollToTop";
 import NavBar from "./components/navBar/navBar";
 import LandingPage from "./pages/landingPage/landingPage";
-// import MoviePage from "./pages/moviePage/moviePage";
-// import TvPage from "./pages/tvPage/tvPage";
 import Discover from "./pages/discover/discover";
-import TVDetails from "./pages/tvDetails/tvDetails";
-import MovieDetails from "./pages/movieDetails/movieDetails";
+import ItemDetails from "./pages/itemDetails/itemDetails";
 import Footer from "./components/footer/footer";
 
 import "./fontawesome/css/all.css";
@@ -38,11 +35,8 @@ const App = props => {
       <div className="App">
         <NavBar />
         <Route path="/" exact component={LandingPage} />
-        {/* <Route path="/movie" component={MoviePage} /> */}
-        {/* <Route path="/tvshows" component={TvPage} /> */}
         <Route path="/discover" component={Discover} />
-        <Route path="/details/tv/:id" component={TVDetails} />
-        <Route path="/details/movie/:id" component={MovieDetails} />
+        <Route path="/details/:type/:id" component={ItemDetails} />
         <Footer />
       </div>
     </BrowserRouter>

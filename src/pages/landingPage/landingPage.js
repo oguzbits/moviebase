@@ -142,22 +142,6 @@ const LandingPage = props => {
             : props.moviesNowPlaying.results
         }
       />
-      {/* <div className="item-controller">
-        <button
-          onClick={() => {
-            props.setItemType("MOVIES");
-            handleMovieFetch();
-          }}>
-          Movies
-        </button>
-        <button
-          onClick={() => {
-            props.setItemType("TV");
-            handleTVFetch();
-          }}>
-          TV Shows
-        </button>
-      </div> */}
       <div className="landing-page-main">{movie}</div>
     </div>
   );

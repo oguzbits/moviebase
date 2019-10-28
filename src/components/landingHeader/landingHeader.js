@@ -1,5 +1,5 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./landingHeader.scss";
 
@@ -10,7 +10,6 @@ const LandingHeader = props => {
       props.movieGenres.genres.forEach(genre => {
         if (genre.id === genreId[0]) {
           mainGenre = genre.name;
-          // console.log("logged");
         }
       });
       return mainGenre;
@@ -37,7 +36,8 @@ const LandingHeader = props => {
           // if (i < 3) {
           if (i > 3 && i < 7) {
             return (
-              <div
+              <Link
+                to={`/details/${props.itemType.toLowerCase()}/${item.id}`}
                 key={item.id}
                 className={i === 4 ? "carousel-item active" : "carousel-item"}>
                 <img
@@ -52,13 +52,13 @@ const LandingHeader = props => {
                   alt=""
                 />
                 <div className="carousel-caption">
-                  <h2>{props.itemType === "MOVIE" ? item.title : item.name}</h2>
+                  <h2>{item.title || item.name}</h2>
                   <p>
                     {handleGetGenre(item.genre_ids)} | {item.vote_average}{" "}
                     <i className="fas fa-star" />
                   </p>
                 </div>
-              </div>
+              </Link>
             );
           }
           return 0;
@@ -67,5 +67,4 @@ const LandingHeader = props => {
     </div>
   );
 };
-
 export default LandingHeader;
