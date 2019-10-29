@@ -7,8 +7,9 @@ import setItemType from "../../actions/setItemType";
 import getDiscover from "../../actions/getDiscover";
 
 import Popularity from "../../components/discoverForms/popularity";
-import GenreList from "../../components/discoverForms/genreList";
+// import GenreList from "../../components/discoverForms/genreList";
 
+import { Dropdown } from "semantic-ui-react";
 import Pagination from "../../components/pagination";
 import "./discover.scss";
 
@@ -26,28 +27,31 @@ const Discover = props => {
       `https://api.themoviedb.org/3/discover/${props.itemType.toLowerCase()}?api_key=${
         props.apiKey
       }&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false
-     &page=${page}&with_genres=${genres}${
+     &page=${page}&with_genres=${genres.value ? genres.value : []}${
         keywords ? `&with_keywords=${keywords}` : ""
       }${
-        props.itemType === "movie"
-          ? "&primary_release_year="
-          : "&first_air_date_year="
+        props.itemType === "TV"
+          ? "&first_air_date_year="
+          : "&primary_release_year="
       }${year}`
     );
   };
 
-  // const handleGenreList = () => {
-  //   let genreType = type === "movie" ? props.movieGenres : props.TVGenres;
-  //   let List = genreType.map(genre => ({
-  //     key: genre.id,
-  //     name: genre.name,
-  //     value: genre.id
-  //   }));
-  //   return List;
-  // };
+  const handleGenreList = () => {
+    let genreType =
+      props.itemType === "MOVIE" ? props.movieGenres : props.TVGenres;
+    let List = genreType.map(genre => ({
+      key: genre.id,
+      text: genre.name,
+      value: genre.id
+    }));
+    return List;
+  };
 
   useEffect(() => {
+    handleGenreList();
     handleGetDiscover();
+    // console.log(genres);
   }, [props.apiKey, props.itemType, sortBy, genres, keywords, year, page]);
 
   const getDateArray = (start, end) => {
@@ -82,6 +86,7 @@ const Discover = props => {
             }}
             onClick={() => {
               props.setItemType("MOVIE");
+              setGenres([]);
               setPage(1);
             }}>
             Movies
@@ -93,6 +98,7 @@ const Discover = props => {
             }}
             onClick={() => {
               props.setItemType("TV");
+              setGenres([]);
               setPage(1);
             }}>
             TV Shows
@@ -127,21 +133,7 @@ const Discover = props => {
             </div>
             <div className="select-genres">
               <h6>Genres</h6>
-              {/* <input
-                multiple
-                name="genreinput"
-                className="custom-select my-1 mr-sm-2"
-                list="genrelist"
-                value={genres}
-                onChange={e => setGenres(e.target.key)}
-                placeholder="Filter by genres..."
-              />
-              <datalist id="genrelist">
-                <GenreList
-                  Genres={type === "movie" ? props.movieGenres : props.TVGenres}
-                />
-              </datalist> */}
-              <select
+              {/* <select
                 className="custom-select my-1 mr-sm-2"
                 value={genres.id}
                 onChange={e => setGenres(e.target.value)}
@@ -153,7 +145,19 @@ const Discover = props => {
                       : props.TVGenres
                   }
                 />
-              </select>
+              </select> */}
+              <Dropdown
+                placeholder="Filter by genres..."
+                fluid
+                multiple
+                search
+                selection
+                onChange={(...args) => {
+                  setGenres({ value: args[1].value });
+                }}
+                clearable
+                options={handleGenreList()}
+              />
             </div>
             <div className="select-keywords">
               <h6>Keywords</h6>
