@@ -112,7 +112,7 @@ const Discover = props => {
                 fluid
                 selection
                 onChange={(...args) => {
-                  setSortBy(args[1].value);
+                  setYear(args[1].value);
                 }}
                 options={handleYearList(yearList)}
               />
