@@ -7,6 +7,7 @@ import setItemType from "../../actions/setItemType";
 import getDiscover from "../../actions/getDiscover";
 
 import { options } from "../../components/discoverForms/popularity";
+import keyword_ids from "../../components/discoverForms/keyword_ids.json";
 
 import { Dropdown } from "semantic-ui-react";
 import Pagination from "../../components/pagination";
@@ -18,8 +19,13 @@ const Discover = props => {
   const [sortBy, setSortBy] = useState("popularity.desc");
   const [genres, setGenres] = useState([]);
   const [keywords, setKeywords] = useState([]);
+  const [keywordInput, setKeywordInput] = useState([]);
   const [year, setYear] = useState(currentYear);
   const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    handleGetDiscover();
+  }, [props.apiKey, props.itemType, sortBy, genres, keywords, year, page]);
 
   const handleGetDiscover = () => {
     props.getDiscover(
@@ -27,7 +33,7 @@ const Discover = props => {
         props.apiKey
       }&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false
      &page=${page}&with_genres=${genres.value ? genres.value : []}${
-        keywords ? `&with_keywords=${keywords}` : ""
+        keywords.value ? `&with_keywords=${keywords.value}` : ""
       }${
         props.itemType === "TV"
           ? "&first_air_date_year="
@@ -47,10 +53,23 @@ const Discover = props => {
     return List;
   };
 
-  useEffect(() => {
-    handleGenreList();
-    handleGetDiscover();
-  }, [props.apiKey, props.itemType, sortBy, genres, keywords, year, page]);
+  const handleKeywordList = searchInput => {
+    if (searchInput.length > 1) {
+      const filtered = keyword_ids.filter(
+        // el => el.name.toLowerCase().indexOf(searchInput.toLowerCase()) > -1
+        el => el.name.toLowerCase().startsWith(searchInput.toLowerCase())
+      );
+      const options = filtered
+        .map(keyword => ({
+          key: keyword.id,
+          text: keyword.name,
+          value: keyword.id
+        }))
+        .sort((a, b) => a.text - b.text);
+      return setKeywordInput(options);
+    }
+    return 0;
+  };
 
   const getDateArray = (start, end) => {
     let arr = [],
@@ -146,16 +165,20 @@ const Discover = props => {
             </div>
             <div className="select-keywords">
               <h6>Keywords</h6>
-              <input
-                multiple="multiple"
-                className="form-control"
-                onSubmit={e => {
-                  e.preventDefault();
-                  setKeywords(e.target.value);
-                }}
-                type="text"
-                name="keywords"
+              <Dropdown
                 placeholder="Filter by keywords..."
+                fluid
+                multiple
+                search
+                selection
+                onSearchChange={(...args) => {
+                  handleKeywordList(args[1].searchQuery);
+                }}
+                onChange={(...args) => {
+                  setKeywords({ value: args[1].value });
+                }}
+                clearable
+                options={keywordInput}
               />
             </div>
           </div>
