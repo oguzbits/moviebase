@@ -14,7 +14,6 @@ import postTVPopular from "../../actions/TVActions/postTVPopular";
 import postTVOnTheAir from "../../actions/TVActions/postTVOnTheAir";
 import postTVTopRated from "../../actions/TVActions/postTVTopRated";
 
-import NavBar from "../../components/navBar/navBar";
 import LandingHeader from "../../components/landingHeader/landingHeader";
 import Carousel from "../../components/carousel/carousel";
 
@@ -129,7 +128,6 @@ const LandingPage = props => {
 
   return (
     <div className="landing-page">
-      <NavBar />
       <LandingHeader
         itemType={props.itemType}
         MDBConfig={props.MDBConfig}

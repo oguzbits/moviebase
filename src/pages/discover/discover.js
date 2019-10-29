@@ -6,8 +6,7 @@ import moment from "moment";
 import setItemType from "../../actions/setItemType";
 import getDiscover from "../../actions/getDiscover";
 
-import Popularity from "../../components/discoverForms/popularity";
-// import GenreList from "../../components/discoverForms/genreList";
+import { options } from "../../components/discoverForms/popularity";
 
 import { Dropdown } from "semantic-ui-react";
 import Pagination from "../../components/pagination";
@@ -51,7 +50,6 @@ const Discover = props => {
   useEffect(() => {
     handleGenreList();
     handleGetDiscover();
-    // console.log(genres);
   }, [props.apiKey, props.itemType, sortBy, genres, keywords, year, page]);
 
   const getDateArray = (start, end) => {
@@ -65,6 +63,9 @@ const Discover = props => {
   };
 
   const yearList = [...getDateArray(1900, currentYear), "None"];
+  const handleYearList = yearList => {
+    return yearList.reverse().map(year => ({ text: year, value: year }));
+  };
 
   const config = props.MDBConfig.images;
   const imageSource = item => {
@@ -86,7 +87,6 @@ const Discover = props => {
             }}
             onClick={() => {
               props.setItemType("MOVIE");
-              setGenres([]);
               setPage(1);
             }}>
             Movies
@@ -98,7 +98,6 @@ const Discover = props => {
             }}
             onClick={() => {
               props.setItemType("TV");
-              setGenres([]);
               setPage(1);
             }}>
             TV Shows
@@ -108,44 +107,30 @@ const Discover = props => {
           <div className="discover-header-form-container">
             <div className="select-year">
               <h6>Year</h6>
-              <select
-                className="custom-select my-1 mr-sm-2"
-                onChange={e => setYear(e.target.value)}
-                name="year"
-                defaultValue={currentYear}>
-                {Array.from(yearList)
-                  .reverse()
-                  .map(year => (
-                    <option key={year} value={year}>
-                      {year}
-                    </option>
-                  ))}
-              </select>
+              <Dropdown
+                defaultValue={currentYear}
+                fluid
+                selection
+                onChange={(...args) => {
+                  setSortBy(args[1].value);
+                }}
+                options={handleYearList(yearList)}
+              />
             </div>
             <div className="select-sortby">
               <h6>Sort By</h6>
-              <select
-                className="custom-select my-1 mr-sm-2"
-                onChange={e => setSortBy(e.target.value)}
-                name="sort_by">
-                <Popularity />
-              </select>
+              <Dropdown
+                defaultValue={options[0].value}
+                fluid
+                selection
+                onChange={(...args) => {
+                  setSortBy(args[1].value);
+                }}
+                options={options}
+              />
             </div>
             <div className="select-genres">
               <h6>Genres</h6>
-              {/* <select
-                className="custom-select my-1 mr-sm-2"
-                value={genres.id}
-                onChange={e => setGenres(e.target.value)}
-                placeholder="Filter by genres...">
-                <GenreList
-                  Genres={
-                    props.itemType === "movie"
-                      ? props.movieGenres
-                      : props.TVGenres
-                  }
-                />
-              </select> */}
               <Dropdown
                 placeholder="Filter by genres..."
                 fluid
