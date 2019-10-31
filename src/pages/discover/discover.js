@@ -11,6 +11,10 @@ import keyword_ids from "../../components/discoverForms/keyword_ids.json";
 
 import { Dropdown } from "semantic-ui-react";
 import Pagination from "../../components/pagination";
+
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+
+import "react-circular-progressbar/dist/styles.css";
 import "./discover.scss";
 
 const Discover = props => {
@@ -60,15 +64,17 @@ const Discover = props => {
         el => el.name.toLowerCase().startsWith(searchInput.toLowerCase())
       );
       const options = filtered
-        .map(keyword => ({
-          key: keyword.id,
-          text: keyword.name,
-          value: keyword.id
-        }))
+        .map(
+          (keyword, i) =>
+            i < 20 && {
+              key: keyword.id,
+              text: keyword.name,
+              value: keyword.id
+            }
+        )
         .sort((a, b) => a.text - b.text);
       return setKeywordInput(options);
     }
-    return 0;
   };
 
   const getDateArray = (start, end) => {
@@ -84,6 +90,12 @@ const Discover = props => {
   const yearList = [...getDateArray(1900, currentYear), "None"];
   const handleYearList = yearList => {
     return yearList.reverse().map(year => ({ text: year, value: year }));
+  };
+
+  const pathTrailColor = rating => {
+    return rating >= 7
+      ? `rgba(16, 138, 26, ${(rating * 10) / 100})`
+      : `rgba(255, 194, 25, ${(rating * 10) / 100})`;
   };
 
   const config = props.MDBConfig.images;
@@ -206,9 +218,34 @@ const Discover = props => {
                       </div>
                       <div className="card">
                         <div className="card-body">
-                          <h5 className="card-title">
+                          {/* <h5 className="card-title">
                             {item.vote_average} | {item.title || item.name}
-                          </h5>
+                          </h5> */}
+                          <div className="card-title">
+                            <div>
+                              <CircularProgressbar
+                                className="circularprogressbar"
+                                styles={buildStyles({
+                                  textSize: "45px",
+                                  pathColor: `${pathTrailColor(
+                                    item.vote_average
+                                  )}`,
+                                  textColor: "#fff",
+                                  trailColor: "black",
+                                  backgroundColor: "black"
+                                })}
+                                strokeWidth={10}
+                                background
+                                backgroundPadding={6}
+                                value={item.vote_average * 10}
+                                // text={`${item.vote_average * 10}`}
+                                text={
+                                  <tspan dy={2}>{item.vote_average * 10}</tspan>
+                                }
+                              />
+                            </div>
+                            <div>{item.title || item.name}</div>
+                          </div>
                           <p
                             className="card-text"
                             style={

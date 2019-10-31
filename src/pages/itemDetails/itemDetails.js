@@ -52,8 +52,12 @@ const ItemDetails = props => {
   };
 
   return (
-    <div className="tvdetails-main">
+    <div className="itemdetails-main">
       <ItemDetailsHeader
+        className="itemdetails-header-main"
+        movieGenres={
+          props.itemType === "TV" ? props.TVGenres : props.movieGenres
+        }
         details={
           props.match.params.type === "movie"
             ? props.movieDetails
@@ -62,6 +66,16 @@ const ItemDetails = props => {
         MDBConfig={props.MDBConfig}
         type={props.itemType}
       />
+      <main>
+        <h2>TOP BILLED CAST</h2>
+        <h2>TOP BILLED CAST</h2>
+        <h2>TOP BILLED CAST</h2>
+        <h2>TOP BILLED CAST</h2>
+        <h2>TOP BILLED CAST</h2>
+        <h2>TOP BILLED CAST</h2>
+        <h2>TOP BILLED CAST</h2>
+        <h2>TOP BILLED CAST</h2>
+      </main>
     </div>
   );
 };
@@ -69,6 +83,9 @@ const ItemDetails = props => {
 const mapStateToProps = state => ({
   apiKey: state.PostMDBConfig.apiKey,
   MDBConfig: state.PostMDBConfig,
+
+  movieGenres: state.postMovieGenres,
+  TVGenres: state.postTVGenres,
 
   itemType: state.setItemType.itemType,
 

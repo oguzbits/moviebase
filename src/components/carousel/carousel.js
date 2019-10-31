@@ -2,7 +2,9 @@ import React from "react";
 import moment from "moment";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
+import "react-circular-progressbar/dist/styles.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./carousel.scss";
@@ -45,7 +47,19 @@ const Carousel = props => {
     ]
   };
 
+  const pathTrailColor = rating => {
+    return rating >= 7
+      ? `rgba(24, 201, 39, ${(rating * 10) / 100})`
+      : `rgba(255, 208, 0, ${(rating * 10) / 100})`;
+  };
+
   const config = props.MDBConfig.images;
+  const imageSource = item => {
+    return config
+      ? config.secure_base_url + config.poster_sizes[0] + item.poster_path ||
+          item.backdrop_path
+      : "";
+  };
 
   return (
     <div className="carousel-main">
@@ -61,23 +75,31 @@ const Carousel = props => {
             className="card">
             <div id="card-grid">
               <div className="card">
-                <img
-                  src={`${
-                    config
-                      ? config.secure_base_url +
-                        config.poster_sizes[2] +
-                        item.poster_path
-                      : ""
-                  }`}
-                  className="card-img"
-                  alt="..."
-                />
+                <img src={imageSource(item)} className="card-img" alt="..." />
               </div>
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">
-                    {item.vote_average} | {item.title || item.name}
-                  </h5>
+                  <div className="card-title">
+                    <div>
+                      <CircularProgressbar
+                        className="circularprogressbar"
+                        styles={buildStyles({
+                          textSize: "45px",
+                          pathColor: `${pathTrailColor(item.vote_average)}`,
+                          textColor: "#fff",
+                          trailColor: "black",
+                          backgroundColor: "black"
+                        })}
+                        strokeWidth={10}
+                        background
+                        backgroundPadding={6}
+                        value={item.vote_average * 10}
+                        // text={`${item.vote_average * 10}`}
+                        text={<tspan dy={2}>{item.vote_average * 10}</tspan>}
+                      />
+                    </div>
+                    <div>{item.title || item.name}</div>
+                  </div>
                   <p
                     className="card-text"
                     style={({ minHeight: "85px" }, { maxHeight: "85px" })}>

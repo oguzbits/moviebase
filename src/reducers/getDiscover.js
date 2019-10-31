@@ -1,11 +1,14 @@
-import { GET_DISCOVER } from '../actions/types';
+import { GET_DISCOVER } from "../actions/types";
 
 const initialState = {
+  page: "",
+  total_results: "",
+  total_pages: "",
   results: []
 };
 
 const getDiscover = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_DISCOVER:
       return {
         ...state,
@@ -14,6 +17,6 @@ const getDiscover = (state = initialState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default getDiscover;

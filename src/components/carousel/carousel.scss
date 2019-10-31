@@ -20,7 +20,7 @@
   text-align: left;
   color: white;
   background-color: #282c34;
-  img {
+  .card-img {
     min-height: 240px;
   }
   :hover {
@@ -52,7 +52,14 @@
 
 .card-title {
   font-family: "Helvetica", sans-serif;
-  font-weight: 400;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 13% 87%;
+  grid-column-gap: 7px;
+  //   .circularprogressbar {
+  // background: rgb(24, 201, 39);
+  // background: rgb(255, 251, 0);
+  //   }
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

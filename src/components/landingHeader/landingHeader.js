@@ -39,6 +39,7 @@ const LandingHeader = props => {
               <Link
                 to={`/details/${props.itemType.toLowerCase()}/${item.id}`}
                 key={item.id}
+                data-interval="8000"
                 className={i === 4 ? "carousel-item active" : "carousel-item"}>
                 <img
                   src={

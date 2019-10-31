@@ -25,9 +25,9 @@ const NavBar = props => {
 
   return (
     <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
-      <Link className="navbar-brand" to="/">
+      <li className="navbar-brand" onClick={() => setMovieType("MOVIE")}>
         <img src={Movielogo} width="30" height="30" alt="" />
-      </Link>
+      </li>
       <button
         className="navbar-toggler"
         type="button"
