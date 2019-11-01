@@ -1,5 +1,5 @@
 html {
-  // box-sizing: border-box;
+  box-sizing: border-box;
   font-size: 14px;
   // background-color: rgb(27, 27, 27);
   background-color: #212224;
@@ -34,11 +34,6 @@ html {
     font-size: 16px;
   }
 }
-// @media (min-width: 769px) {
-//   html {
-//     font-size: 18px;
-//   }
-// }
 
 @font-face {
   font-family: "Roboto";

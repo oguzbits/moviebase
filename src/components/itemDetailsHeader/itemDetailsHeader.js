@@ -10,6 +10,8 @@ import "./itemDetailsHeader.scss";
 
 const ItemDetailsHeader = props => {
   const [isOpen, setIsOpen] = useState(false);
+  const [trailerID, setTrailerID] = useState(false);
+  const [site, setSite] = useState("");
 
   // const handleGetGenre = genreId => {
   //   let mainGenre;
@@ -33,7 +35,7 @@ const ItemDetailsHeader = props => {
   //   background: `linear-gradient(0deg, rgba(0,0,0,1) 5%, rgba(0,0,0,0.45) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
   // };
   const headerImg = {
-    background: `linear-gradient(0deg, rgba(27,27,27,0.7) 5%, rgba(27,27,27,0.7) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
+    background: `linear-gradient(0deg, rgba(15,15,15,0.95) 5%, rgba(15,15,15,0.95) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
   };
 
   const posterLink = config
@@ -85,54 +87,74 @@ const ItemDetailsHeader = props => {
   }
 
   return (
-    <div>
-      <header className="itemdetail-header" style={headerImg}>
-        <div className="itemdetail-header-backimage">
-          <div className="itemdetail-header-info">
-            <section className="itemdetail-title-grid">
-              <div className="itemdetail-header-poster">
-                <img className="visible" src={posterLink} alt="" />
+    <header className="itemdetail-header" style={headerImg}>
+      <div className="itemdetail-header-backimage">
+        <div className="itemdetail-header-info">
+          <section className="itemdetail-title-grid">
+            <div className="itemdetail-header-poster">
+              <img className="visible" src={posterLink} alt="" />
+            </div>
+            <div className="itemdetail-header-text">
+              <div className="itemdetail-title">
+                <h2>{props.details.name || props.details.title}</h2>
+                <h4>({moment(props.details.release_date).format("YYYY")})</h4>
               </div>
-              <div className="itemdetail-header-text">
-                <div className="itemdetail-title">
-                  <h2>{props.details.name || props.details.title}</h2>
-                  <h4>({moment(props.details.release_date).format("YYYY")})</h4>
-                </div>
-                <div className="itemdetail-trailer-link">
+              <div className="itemdetail-trailer-link">
+                <div className="rating-element">
                   <div className="circular-rating">{circularRatingBar}</div>
-                  <h4>
-                    User
-                    <br />
-                    Score
-                  </h4>
                   <div>
-                    <ModalVideo
-                      channel="youtube"
-                      isOpen={isOpen}
-                      videoId="L61p2uyiMSo"
-                      onClose={() => setIsOpen(false)}
-                    />
-                    <li
-                      className="details-trailer"
-                      onClick={() => setIsOpen(true)}>
-                      {/* <i className="material-icons">play_arrow</i> */}
-                      Play Trailer
-                    </li>
+                    <span>
+                      User
+                      <br />
+                      Score
+                    </span>
                   </div>
                 </div>
-                <div className="itemdetail-header-overview">
-                  <h4>Overview</h4>
-                  <p>{props.details.overview}</p>
+                <div>
+                  <div>
+                    {props.trailer.results[0] ? (
+                      <div>
+                        <div>
+                          <ModalVideo
+                            channel={site.toLowerCase()}
+                            isOpen={isOpen}
+                            videoId={trailerID}
+                            onClose={() => setIsOpen(false)}
+                          />
+                        </div>
+                        <div
+                          className="details-trailer"
+                          onClick={() => {
+                            setIsOpen(true);
+                            setTrailerID(props.trailer.results[0].key);
+                            setSite(props.trailer.results[0].site);
+                          }}>
+                          <span>
+                            <i className="fa fa-play fa-sm" />
+                            <span> Play Trailer</span>
+                          </span>
+                        </div>
+                      </div>
+                    ) : (
+                      <span style={{ opacity: "0.7" }}>
+                        No Trailer available
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
-            </section>
-          </div>
+              <div className="itemdetail-header-overview">
+                <h4>Overview</h4>
+                <p>{props.details.overview}</p>
+              </div>
+            </div>
+          </section>
         </div>
-      </header>
-      <main className="itemdetail-header-main-info">
-        <div className="itemdetail-header-rating"></div>
-      </main>
-    </div>
+      </div>
+    </header>
+    // <main className="itemdetail-header-main-info">
+    //   <div className="itemdetail-header-rating"></div>
+    // </main>
   );
 };
 

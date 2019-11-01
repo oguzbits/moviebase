@@ -94,8 +94,7 @@ const Carousel = props => {
                         background
                         backgroundPadding={6}
                         value={item.vote_average * 10}
-                        // text={`${item.vote_average * 10}`}
-                        text={<tspan dy={2}>{item.vote_average * 10}</tspan>}
+                        text={<tspan dy={2.5}>{item.vote_average * 10}</tspan>}
                       />
                     </div>
                     <div>{item.title || item.name}</div>

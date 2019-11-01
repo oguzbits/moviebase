@@ -240,7 +240,9 @@ const Discover = props => {
                                 value={item.vote_average * 10}
                                 // text={`${item.vote_average * 10}`}
                                 text={
-                                  <tspan dy={2}>{item.vote_average * 10}</tspan>
+                                  <tspan dy={2.5}>
+                                    {item.vote_average * 10}
+                                  </tspan>
                                 }
                               />
                             </div>

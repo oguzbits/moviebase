@@ -63,6 +63,9 @@ const ItemDetails = props => {
             ? props.movieDetails
             : props.TVDetails
         }
+        trailer={
+          props.itemType === "TV" ? props.TVTrailers : props.movieTrailers
+        }
         MDBConfig={props.MDBConfig}
         type={props.itemType}
       />

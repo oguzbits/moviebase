@@ -9,12 +9,11 @@
   width: 100%;
   .itemdetail-header-info {
     color: white;
-
     .itemdetail-title-grid {
       display: grid;
       grid-template-columns: 300px 700px;
       grid-column-gap: 50px;
-      padding: 25rem 15rem 10rem 10rem;
+      padding: 18rem 20rem 10rem 20rem;
       .itemdetail-title {
         display: flex;
         h4 {
@@ -23,15 +22,23 @@
         }
       }
       .details-trailer {
-        :hover {
+        &:hover {
           cursor: pointer;
           opacity: 0.7;
         }
       }
       .itemdetail-trailer-link {
         display: flex;
+        align-items: center;
+        padding: 15px 0 15px 0;
+        .rating-element {
+          display: flex;
+          align-items: center;
+          margin-right: 30px;
+        }
         .circular-rating {
-          width: 100px;
+          margin-right: 10px;
+          width: 80px;
         }
       }
     }
