@@ -251,8 +251,8 @@ const Discover = props => {
                             style={
                               ({ minHeight: "85px" }, { maxHeight: "85px" })
                             }>
-                            {item.overview.length > 212
-                              ? `${item.overview.substring(0, 212)}...`
+                            {item.overview.length > 200
+                              ? `${item.overview.substring(0, 200)}...`
                               : item.overview}
                           </p>
                         </div>

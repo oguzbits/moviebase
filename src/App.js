@@ -7,10 +7,10 @@ import postMovieGenres from "./actions/movieActions/postMovieGenres";
 import postTVGenres from "./actions/TVActions/postTVGenres";
 
 import ScrollToTop from "./components/scrollToTop/scrollToTop";
-import NavBar from "./components/navBar/navBar";
 import LandingPage from "./pages/landingPage/landingPage";
 import Discover from "./pages/discover/discover";
 import ItemDetails from "./pages/itemDetails/itemDetails";
+import NavBar from "./components/navBar/navBar";
 import Footer from "./components/footer/footer";
 
 import "./fontawesome/css/all.css";
