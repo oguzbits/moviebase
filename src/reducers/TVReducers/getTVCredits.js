@@ -1,11 +1,12 @@
-import { GET_TV_CREDITS } from '../../actions/types'
+import { GET_TV_CREDITS } from "../../actions/types";
 
 const initialState = {
-  cast: []
+  cast: [],
+  crew: []
 };
 
 const getTVCredits = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_TV_CREDITS:
       return {
         ...state,
@@ -16,4 +17,4 @@ const getTVCredits = (state = initialState, action) => {
   }
 };
 
- export default getTVCredits;
+export default getTVCredits;

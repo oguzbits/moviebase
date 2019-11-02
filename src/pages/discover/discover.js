@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
+import NavBar from "../../components/navBar/navBar";
+import Footer from "../../components/footer/footer";
+
 import setItemType from "../../actions/setItemType";
 import getDiscover from "../../actions/getDiscover";
 
@@ -106,193 +109,194 @@ const Discover = props => {
       : "";
   };
   return (
-    <div className="discover-main">
-      <header>
-        <h1>DISCOVER</h1>
-        <hr />
-        <div className="discover-subheader">
-          <h3
-            id="header-movies"
-            style={{
-              textDecoration: props.itemType === "TV" ? "" : "underline"
-            }}
-            onClick={() => {
-              props.setItemType("MOVIE");
-              setPage(1);
-            }}>
-            Movies
-          </h3>
-          <h3
-            id="header-tvshows"
-            style={{
-              textDecoration: props.itemType === "TV" ? "underline" : ""
-            }}
-            onClick={() => {
-              props.setItemType("TV");
-              setPage(1);
-            }}>
-            TV Shows
-          </h3>
-        </div>
-        <form className="discover-header-form">
-          <div className="discover-header-form-container">
-            <div className="select-year">
-              <h6>Year</h6>
-              <Dropdown
-                defaultValue={currentYear}
-                fluid
-                selection
-                onChange={(...args) => {
-                  setYear(args[1].value);
-                }}
-                options={handleYearList(yearList)}
-              />
-            </div>
-            <div className="select-sortby">
-              <h6>Sort By</h6>
-              <Dropdown
-                defaultValue={options[0].value}
-                fluid
-                selection
-                onChange={(...args) => {
-                  setSortBy(args[1].value);
-                }}
-                options={options}
-              />
-            </div>
-            <div className="select-genres">
-              <h6>Genres</h6>
-              <Dropdown
-                placeholder="Filter by genres..."
-                fluid
-                multiple
-                search
-                selection
-                onChange={(...args) => {
-                  setGenres({ value: args[1].value });
-                }}
-                clearable
-                options={handleGenreList()}
-              />
-            </div>
-            <div className="select-keywords">
-              <h6>Keywords</h6>
-              <Dropdown
-                placeholder="Filter by keywords..."
-                fluid
-                multiple
-                search
-                selection
-                onSearchChange={(...args) => {
-                  handleKeywordList(args[1].searchQuery);
-                }}
-                onChange={(...args) => {
-                  setKeywords({ value: args[1].value });
-                }}
-                clearable
-                options={keywordInput}
-              />
-            </div>
+    <div>
+      <div className="discover-main">
+        <NavBar />
+        <header>
+          <h1>DISCOVER</h1>
+          <hr />
+          <div className="discover-subheader">
+            <h3
+              id="header-movies"
+              style={{
+                textDecoration: props.itemType === "TV" ? "" : "underline"
+              }}
+              onClick={() => {
+                props.setItemType("MOVIE");
+                setPage(1);
+              }}>
+              Movies
+            </h3>
+            <h3
+              id="header-tvshows"
+              style={{
+                textDecoration: props.itemType === "TV" ? "underline" : ""
+              }}
+              onClick={() => {
+                props.setItemType("TV");
+                setPage(1);
+              }}>
+              TV Shows
+            </h3>
           </div>
-        </form>
-      </header>
-      <main className="discover-main">
-        <div className="card-wrapper">
-          {props.discover.results.length > 0 ? (
-            props.discover.results.map(
-              item =>
-                imageSource(item) &&
-                item.overview && (
-                  <Link
-                    to={`/details/${props.itemType.toLowerCase()}/${item.id}`}
-                    key={item.id}
-                    id="card-container"
-                    className="card">
-                    <div id="card-grid">
-                      <div className="card">
-                        <img
-                          src={imageSource(item)}
-                          alt="..."
-                          className="card-img"
-                        />
-                      </div>
-                      <div className="card">
-                        <div className="card-body">
-                          {/* <h5 className="card-title">
-                            {item.vote_average} | {item.title || item.name}
-                          </h5> */}
-                          <div className="card-title">
-                            <div>
-                              <CircularProgressbar
-                                className="circularprogressbar"
-                                styles={buildStyles({
-                                  textSize: "45px",
-                                  pathColor: `${pathTrailColor(
-                                    item.vote_average
-                                  )}`,
-                                  textColor: "#fff",
-                                  trailColor: "black",
-                                  backgroundColor: "black"
-                                })}
-                                strokeWidth={10}
-                                background
-                                backgroundPadding={6}
-                                value={item.vote_average * 10}
-                                // text={`${item.vote_average * 10}`}
-                                text={
-                                  <tspan dy={2.5}>
-                                    {item.vote_average * 10}
-                                  </tspan>
-                                }
-                              />
+          <form className="discover-header-form">
+            <div className="discover-header-form-container">
+              <div className="select-year">
+                <h6>Year</h6>
+                <Dropdown
+                  defaultValue={currentYear}
+                  fluid
+                  selection
+                  onChange={(...args) => {
+                    setYear(args[1].value);
+                  }}
+                  options={handleYearList(yearList)}
+                />
+              </div>
+              <div className="select-sortby">
+                <h6>Sort By</h6>
+                <Dropdown
+                  defaultValue={options[0].value}
+                  fluid
+                  selection
+                  onChange={(...args) => {
+                    setSortBy(args[1].value);
+                  }}
+                  options={options}
+                />
+              </div>
+              <div className="select-genres">
+                <h6>Genres</h6>
+                <Dropdown
+                  placeholder="Filter by genres..."
+                  fluid
+                  multiple
+                  search
+                  selection
+                  onChange={(...args) => {
+                    setGenres({ value: args[1].value });
+                  }}
+                  clearable
+                  options={handleGenreList()}
+                />
+              </div>
+              <div className="select-keywords">
+                <h6>Keywords</h6>
+                <Dropdown
+                  placeholder="Filter by keywords..."
+                  fluid
+                  multiple
+                  search
+                  selection
+                  onSearchChange={(...args) => {
+                    handleKeywordList(args[1].searchQuery);
+                  }}
+                  onChange={(...args) => {
+                    setKeywords({ value: args[1].value });
+                  }}
+                  clearable
+                  options={keywordInput}
+                />
+              </div>
+            </div>
+          </form>
+        </header>
+        <main className="discover-main">
+          <div className="card-wrapper">
+            {props.discover.results.length > 0 ? (
+              props.discover.results.map(
+                item =>
+                  imageSource(item) &&
+                  item.overview && (
+                    <Link
+                      to={`/details/${props.itemType.toLowerCase()}/${item.id}`}
+                      key={item.id}
+                      id="card-container"
+                      className="card">
+                      <div id="card-grid">
+                        <div className="card">
+                          <img
+                            src={imageSource(item)}
+                            alt="..."
+                            className="card-img"
+                          />
+                        </div>
+                        <div className="card">
+                          <div className="card-body">
+                            <div className="card-title">
+                              <div>
+                                <CircularProgressbar
+                                  className="circularprogressbar"
+                                  styles={buildStyles({
+                                    textSize: "45px",
+                                    pathColor: `${pathTrailColor(
+                                      item.vote_average
+                                    )}`,
+                                    textColor: "#fff",
+                                    trailColor: "black",
+                                    backgroundColor: "black"
+                                  })}
+                                  strokeWidth={10}
+                                  background
+                                  backgroundPadding={6}
+                                  value={item.vote_average * 10}
+                                  // text={`${item.vote_average * 10}`}
+                                  text={
+                                    <tspan dy={2.5}>
+                                      {item.vote_average * 10}
+                                    </tspan>
+                                  }
+                                />
+                              </div>
+                              <div>{item.title || item.name}</div>
                             </div>
-                            <div>{item.title || item.name}</div>
+                            <p
+                              className="card-text"
+                              style={
+                                ({ minHeight: "85px" }, { maxHeight: "85px" })
+                              }>
+                              {item.overview.length > 200
+                                ? `${item.overview.substring(0, 200)}...`
+                                : item.overview}
+                            </p>
                           </div>
-                          <p
-                            className="card-text"
-                            style={
-                              ({ minHeight: "85px" }, { maxHeight: "85px" })
+                          <div
+                            id="footer-container"
+                            className={
+                              item.vote_average >= 7
+                                ? "card-footer text-muted border-success"
+                                : "card-footer text-muted border-warning"
                             }>
-                            {item.overview.length > 200
-                              ? `${item.overview.substring(0, 200)}...`
-                              : item.overview}
-                          </p>
-                        </div>
-                        <div
-                          id="footer-container"
-                          className={
-                            item.vote_average >= 7
-                              ? "card-footer text-muted border-success"
-                              : "card-footer text-muted border-warning"
-                          }>
-                          <div className="card-footer">
-                            <small className="text-muted">
-                              {moment(
-                                item.release_date || item.first_air_date
-                              ).format("MMMM D, YYYY")}
-                            </small>
+                            <div className="card-footer">
+                              <small className="text-muted">
+                                {moment(
+                                  item.release_date || item.first_air_date
+                                ).format("MMMM D, YYYY")}
+                              </small>
+                            </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </Link>
-                )
-            )
-          ) : (
-            <h2 style={{ color: "white" }} className="discover-warning">
-              No results found
-            </h2>
-          )}
+                    </Link>
+                  )
+              )
+            ) : (
+              <h2 style={{ color: "white" }} className="discover-warning">
+                No results found
+              </h2>
+            )}
+          </div>
+        </main>
+        <div className="discover-pagination">
+          <Pagination
+            itemsCount={200}
+            pageSize={20}
+            currentPage={page}
+            onPageChange={page => setPage(page)}
+          />
         </div>
-      </main>
-      <div className="discover-pagination">
-        <Pagination
-          itemsCount={200}
-          pageSize={20}
-          currentPage={page}
-          onPageChange={page => setPage(page)}
-        />
       </div>
+      <Footer />
     </div>
   );
 };

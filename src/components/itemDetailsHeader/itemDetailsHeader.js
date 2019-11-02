@@ -90,9 +90,9 @@ const ItemDetailsHeader = props => {
     <header className="itemdetail-header" style={headerImg}>
       <div className="itemdetail-header-backimage">
         <div className="itemdetail-header-info">
-          <section className="itemdetail-title-grid">
+          <section className="itemdetail-header-grid">
             <div className="itemdetail-header-poster">
-              <img className="visible" src={posterLink} alt="" />
+              <img className="poster fade-in one" src={posterLink} alt="" />
             </div>
             <div className="itemdetail-header-text">
               <div className="itemdetail-title">
@@ -147,14 +147,28 @@ const ItemDetailsHeader = props => {
                 <h4>Overview</h4>
                 <p>{props.details.overview}</p>
               </div>
+              {props.credits.crew.length > 0 && (
+                <div className="itemdetail-header-crew">
+                  <h4>Featured Crew</h4>
+                  <div className="itemdetail-header-crew-members">
+                    {props.credits.crew.map((member, i) => {
+                      if (i < 3) {
+                        return (
+                          <div key={member.i}>
+                            <h6>{member.name}</h6>
+                            <p>{member.job}</p>
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           </section>
         </div>
       </div>
     </header>
-    // <main className="itemdetail-header-main-info">
-    //   <div className="itemdetail-header-rating"></div>
-    // </main>
   );
 };
 

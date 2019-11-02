@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 // import { Link } from "react-router-dom";
 
+import NavBar from "../../components/navBar/navBar";
+
 import ItemDetailsHeader from "../../components/itemDetailsHeader/itemDetailsHeader";
 
 import getMovieDetails from "../../actions/movieActions/getMovieDetails";
@@ -53,32 +55,31 @@ const ItemDetails = props => {
 
   return (
     <div className="itemdetails-main">
-      <ItemDetailsHeader
-        className="itemdetails-header-main"
-        movieGenres={
-          props.itemType === "TV" ? props.TVGenres : props.movieGenres
-        }
-        details={
-          props.match.params.type === "movie"
-            ? props.movieDetails
-            : props.TVDetails
-        }
-        trailer={
-          props.itemType === "TV" ? props.TVTrailers : props.movieTrailers
-        }
-        MDBConfig={props.MDBConfig}
-        type={props.itemType}
-      />
-      <main>
-        <h2>TOP BILLED CAST</h2>
-        <h2>TOP BILLED CAST</h2>
-        <h2>TOP BILLED CAST</h2>
-        <h2>TOP BILLED CAST</h2>
-        <h2>TOP BILLED CAST</h2>
-        <h2>TOP BILLED CAST</h2>
-        <h2>TOP BILLED CAST</h2>
-        <h2>TOP BILLED CAST</h2>
-      </main>
+      <NavBar />
+      <div className="itemdetails-grid">
+        <ItemDetailsHeader
+          className="itemdetails-header-main"
+          movieGenres={
+            props.itemType === "TV" ? props.TVGenres : props.movieGenres
+          }
+          details={
+            props.match.params.type === "movie"
+              ? props.movieDetails
+              : props.TVDetails
+          }
+          trailer={
+            props.itemType === "TV" ? props.TVTrailers : props.movieTrailers
+          }
+          credits={
+            props.match.params.type === "movie"
+              ? props.movieCredits
+              : props.TVCredits
+          }
+          MDBConfig={props.MDBConfig}
+          type={props.itemType}
+        />
+        <main></main>
+      </div>
     </div>
   );
 };

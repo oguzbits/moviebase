@@ -10,8 +10,8 @@ import ScrollToTop from "./components/scrollToTop/scrollToTop";
 import LandingPage from "./pages/landingPage/landingPage";
 import Discover from "./pages/discover/discover";
 import ItemDetails from "./pages/itemDetails/itemDetails";
-import NavBar from "./components/navBar/navBar";
-import Footer from "./components/footer/footer";
+// import NavBar from "./components/navBar/navBar";
+// import Footer from "./components/footer/footer";
 
 import "./fontawesome/css/all.css";
 import "./App.scss";
@@ -33,11 +33,11 @@ const App = props => {
     <BrowserRouter>
       <ScrollToTop />
       <div className="App">
-        <NavBar />
+        {/* <NavBar /> */}
         <Route path="/" exact component={LandingPage} />
         <Route path="/discover" component={Discover} />
         <Route path="/details/:type/:id" component={ItemDetails} />
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </BrowserRouter>
   );

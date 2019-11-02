@@ -13,6 +13,8 @@ import postTVPopular from "../../actions/TVActions/postTVPopular";
 import postTVOnTheAir from "../../actions/TVActions/postTVOnTheAir";
 import postTVTopRated from "../../actions/TVActions/postTVTopRated";
 
+import NavBar from "../../components/navBar/navBar";
+import Footer from "../../components/footer/footer";
 import LandingHeader from "../../components/landingHeader/landingHeader";
 import Carousel from "../../components/carousel/carousel";
 
@@ -127,6 +129,7 @@ const LandingPage = props => {
 
   return (
     <div className="landing-page">
+      <NavBar />
       <LandingHeader
         itemType={props.itemType}
         MDBConfig={props.MDBConfig}
@@ -140,6 +143,7 @@ const LandingPage = props => {
         }
       />
       <div className="landing-page-main">{movie}</div>
+      <Footer />
     </div>
   );
 };

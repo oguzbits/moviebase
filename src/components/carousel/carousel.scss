@@ -23,6 +23,7 @@
   .card-img {
     min-height: 240px;
   }
+  transition: filter 0.2s ease-in-out;
   &:hover {
     .card {
       filter: brightness(120%);

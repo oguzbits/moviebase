@@ -1,11 +1,12 @@
-import { GET_MOVIE_CREDITS } from '../../actions/types';
+import { GET_MOVIE_CREDITS } from "../../actions/types";
 
 const initialState = {
-  cast: []
+  cast: [],
+  crew: []
 };
 
 const getMovieCredits = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_MOVIE_CREDITS:
       return {
         ...state,
