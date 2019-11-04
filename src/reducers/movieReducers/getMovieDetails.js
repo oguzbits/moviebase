@@ -1,11 +1,11 @@
-import { GET_MOVIE_DETAILS } from '../../actions/types'
+import { GET_MOVIE_DETAILS } from "../../actions/types";
 
 const initialState = {
-
+  runtime: []
 };
 
 const getMovieDetails = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_MOVIE_DETAILS:
       return {
         ...state,

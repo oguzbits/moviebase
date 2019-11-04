@@ -110,8 +110,8 @@ const Discover = props => {
   };
   return (
     <div>
+      <NavBar />
       <div className="discover-main">
-        <NavBar />
         <header>
           <h1>DISCOVER</h1>
           <hr />

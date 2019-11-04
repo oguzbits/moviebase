@@ -1,85 +1,188 @@
-.itemdetail-header {
+.itemdetail-mainheader {
   font-family: "Roboto", sans-serif;
   background-color: rgb(27, 27, 27);
+  color: white;
   p {
-    font-weight: 100;
+    font-weight: 300;
   }
   h2 {
-    font-weight: 600;
+    font-weight: bold;
+    font-size: 40px;
   }
-  background-size: cover !important;
-  height: 350px;
-  @media (min-width: 1050px) {
-    height: 100vh;
+  hr {
+    background: white;
   }
-  width: 100%;
-  .itemdetail-header-info {
-    color: white;
-    .itemdetail-header-grid {
-      justify-content: center;
-      padding-top: 30vh;
-      @media (max-width: 1050px) {
-        padding-top: 10vh;
-        display: flex;
-        flex-flow: wrap;
-        align-items: center;
-        .itemdetail-header-poster {
-          width: 150px;
+  .itemdetail-header {
+    background-size: cover !important;
+    height: 350px;
+    @media (min-width: 1050px) {
+      height: 100vh;
+    }
+    width: 100%;
+    .itemdetail-header-info {
+      .itemdetail-header-grid {
+        justify-content: center;
+        padding-top: 30vh;
+        @media (max-width: 1050px) {
+          padding-top: 10vh;
+          display: flex;
+          flex-flow: wrap;
+          .itemdetail-header-poster {
+            width: 150px;
+          }
         }
-        // position: absolute;
-        // top: 50%;
-        // left: 50%;
-        // transform: translate(-50%, -50%);
-      }
-      display: grid;
-      grid-template-columns: 300px 700px;
-      grid-gap: 50px;
-      .itemdetail-title {
-        display: flex;
-        h4 {
-          margin: 7px 0 0 5px;
-          opacity: 0.7;
+        display: grid;
+        grid-template-columns: 300px 700px;
+        grid-gap: 50px;
+        .itemdetail-title {
+          display: flex;
+          h4 {
+            font-size: 25px;
+            margin: 13px 0 0 5px;
+            opacity: 0.7;
+          }
         }
-      }
-      .details-trailer {
-        transition: opacity 0.2s ease-in-out;
-        &:hover {
-          cursor: pointer;
-          opacity: 0.7;
+        .details-trailer {
+          transition: opacity 0.2s ease-in-out;
+          &:hover {
+            cursor: pointer;
+            opacity: 0.7;
+          }
         }
-      }
-      .itemdetail-trailer-link {
-        display: flex;
-        align-items: center;
-        padding: 15px 0 25px 0;
-        .rating-element {
+        .itemdetail-trailer-link {
           display: flex;
           align-items: center;
-          margin-right: 30px;
-        }
-        .circular-rating {
-          margin-right: 10px;
-          width: 80px;
-        }
-      }
-      .itemdetail-header-overview {
-        padding-bottom: 25px;
-        h4 {
-          font-weight: 600;
-        }
-      }
-      .itemdetail-header-crew {
-        h4 {
-          font-weight: 600;
-        }
-        .itemdetail-header-crew-members {
-          display: flex;
-          div {
-            padding-right: 20px;
+          padding: 15px 0 25px 0;
+          .rating-element {
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+            line-height: 20px;
+            font-weight: bold;
           }
+          .circular-rating {
+            margin-right: 10px;
+            width: 80px;
+          }
+        }
+        .itemdetail-header-overview {
+          padding-bottom: 25px;
           h4 {
             font-weight: 600;
           }
+        }
+        .itemdetail-header-crew {
+          h4 {
+            font-weight: 600;
+          }
+          .itemdetail-header-crew-members {
+            display: flex;
+            div {
+              padding-right: 80px;
+            }
+            h6 {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+  .itemdetail-main-grid {
+    display: grid;
+    grid-template-columns: 770px 230px;
+    grid-gap: 50px;
+    padding-top: 50px;
+    justify-content: center;
+    @media (max-width: 1050px) {
+      padding-top: 400px;
+    }
+    @media (max-width: 600px) {
+      padding-top: 500px;
+    }
+    .section-one {
+      display: grid;
+      grid-template-columns: 770px;
+      grid-gap: 50px;
+      justify-content: center;
+      .itemdetail-cast-members {
+        display: flex;
+        .cast-card {
+          margin-right: 20px;
+          width: 138px;
+          img {
+            height: 175px;
+            min-width: 138px;
+          }
+          background-color: #282c34;
+          .cast-text {
+            padding: 10px;
+            p {
+              font-weight: 100;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+      .itemdetail-reviews-items {
+        .review-card {
+          width: 770px;
+          background-color: #282c34;
+          margin-bottom: 20px;
+          .review-text {
+            padding: 10px;
+            p {
+              font-weight: 300;
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    .section-two {
+      display: flex;
+      flex-direction: column;
+      padding: 30px;
+      background-color: #282c34;
+      .itemdetail-social-icons {
+        display: flex;
+        padding-bottom: 20px;
+        font-size: 35px;
+        a {
+          color: black;
+          padding: 0 4px;
+          transition: 0.5s;
+          &:hover {
+            color: rgb(0, 255, 255);
+          }
+        }
+      }
+      .itemdetail-facts {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        div {
+          padding-bottom: 10px;
+        }
+        h5 {
+          font-weight: bolder;
+          padding-bottom: 10px;
+        }
+        h6 {
+          font-weight: bolder;
+        }
+      }
+      .itemdetail-runtime-data {
+        display: flex;
+        p {
+          margin-right: 3px;
+        }
+      }
+      .itemdetail-genres {
+        div {
+          display: flex;
+          flex-flow: wrap;
+        }
+        p {
+          padding-right: 10px;
         }
       }
     }
@@ -98,6 +201,7 @@
 }
 
 .fade-in {
+  // opacity: 0; /* make things invisible upon start */
   opacity: 0.7; /* make things invisible upon start */
   filter: blur(5px);
   animation: fadeIn ease-in 1;

@@ -3,8 +3,9 @@ import moment from "moment";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 import ModalVideo from "react-modal-video";
+import { getCountryName } from "./getCountryName";
+// import ReactTooltip from "react-tooltip";
 
-import "../../../node_modules/react-modal-video/scss/modal-video.scss";
 import "react-circular-progressbar/dist/styles.css";
 import "./itemDetailsHeader.scss";
 
@@ -12,18 +13,6 @@ const ItemDetailsHeader = props => {
   const [isOpen, setIsOpen] = useState(false);
   const [trailerID, setTrailerID] = useState(false);
   const [site, setSite] = useState("");
-
-  // const handleGetGenre = genreId => {
-  //   let mainGenre;
-  //   if (props.movieGenres.genres) {
-  //     props.movieGenres.genres.forEach(genre => {
-  //       if (genre.id === genreId[0].id) {
-  //         mainGenre = genre.name;
-  //       }
-  //     });
-  //     return mainGenre;
-  //   }
-  // };
 
   const config = props.MDBConfig.images;
   const backgroundImgLink = config
@@ -35,7 +24,7 @@ const ItemDetailsHeader = props => {
   //   background: `linear-gradient(0deg, rgba(0,0,0,1) 5%, rgba(0,0,0,0.45) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
   // };
   const headerImg = {
-    background: `linear-gradient(0deg, rgba(15,15,15,0.95) 5%, rgba(15,15,15,0.95) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
+    background: `linear-gradient(0deg, rgba(15,15,15,0.9) 5%, rgba(15,15,15,0.9) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
   };
 
   const posterLink = config
@@ -43,6 +32,11 @@ const ItemDetailsHeader = props => {
         config.poster_sizes[3] +
         props.details.poster_path || props.details.backdrop_path
     : "";
+  const castLink = memberPath => {
+    return config
+      ? config.secure_base_url + config.poster_sizes[1] + memberPath
+      : "";
+  };
 
   const pathTrailColor = rating => {
     return rating >= 7
@@ -78,85 +72,117 @@ const ItemDetailsHeader = props => {
     </ChangingProgressProvider>
   );
 
-  {
-    /* <p>
-              {handleGetGenre(props.details.genres)} |{" "}
-              {props.details.vote_average}
-              <i className="fas fa-star" />
-            </p> */
-  }
-
+  const runTime = props.details.runtime
+    ? props.details.runtime
+    : props.details.episode_run_time[0];
+  const language = props.details.original_language;
   return (
-    <header className="itemdetail-header" style={headerImg}>
-      <div className="itemdetail-header-backimage">
-        <div className="itemdetail-header-info">
-          <section className="itemdetail-header-grid">
-            <div className="itemdetail-header-poster">
-              <img className="poster fade-in one" src={posterLink} alt="" />
-            </div>
-            <div className="itemdetail-header-text">
-              <div className="itemdetail-title">
-                <h2>{props.details.name || props.details.title}</h2>
-                <h4>({moment(props.details.release_date).format("YYYY")})</h4>
+    <div className="itemdetail-mainheader">
+      <header className="itemdetail-header" style={headerImg}>
+        <div className="itemdetail-header-backimage">
+          <div className="itemdetail-header-info">
+            <section className="itemdetail-header-grid">
+              <div className="itemdetail-header-poster">
+                <img className="poster fade-in one" src={posterLink} alt="" />
               </div>
-              <div className="itemdetail-trailer-link">
-                <div className="rating-element">
-                  <div className="circular-rating">{circularRatingBar}</div>
-                  <div>
-                    <span>
-                      User
-                      <br />
-                      Score
-                    </span>
-                  </div>
+              <div className="itemdetail-header-text">
+                <div className="itemdetail-title">
+                  <h2>{props.details.name || props.details.title}</h2>
+                  <h4>({moment(props.details.release_date).format("YYYY")})</h4>
                 </div>
-                <div>
-                  <div>
-                    {props.trailer.results[0] ? (
-                      <div>
-                        <div>
-                          <ModalVideo
-                            channel={site.toLowerCase()}
-                            isOpen={isOpen}
-                            videoId={trailerID}
-                            onClose={() => setIsOpen(false)}
-                          />
-                        </div>
-                        <div
-                          className="details-trailer"
-                          onClick={() => {
-                            setIsOpen(true);
-                            setTrailerID(props.trailer.results[0].key);
-                            setSite(props.trailer.results[0].site);
-                          }}>
-                          <span>
-                            <i className="fa fa-play fa-sm" />
-                            <span> Play Trailer</span>
-                          </span>
-                        </div>
-                      </div>
-                    ) : (
-                      <span style={{ opacity: "0.7" }}>
-                        No Trailer available
+                <div className="itemdetail-trailer-link">
+                  <div className="rating-element">
+                    <div className="circular-rating">{circularRatingBar}</div>
+                    <div>
+                      <span>
+                        User
+                        <br />
+                        Score
                       </span>
-                    )}
+                    </div>
+                  </div>
+                  <div>
+                    <div>
+                      {props.trailer.results[0] ? (
+                        <div>
+                          <div>
+                            <ModalVideo
+                              channel={site.toLowerCase()}
+                              isOpen={isOpen}
+                              videoId={trailerID}
+                              onClose={() => setIsOpen(false)}
+                            />
+                          </div>
+                          <div
+                            className="details-trailer"
+                            onClick={() => {
+                              setIsOpen(true);
+                              setTrailerID(props.trailer.results[0].key);
+                              setSite(props.trailer.results[0].site);
+                            }}>
+                            <span>
+                              <i className="fa fa-play fa-sm" />
+                              <span> Play Trailer</span>
+                            </span>
+                          </div>
+                        </div>
+                      ) : (
+                        <span style={{ opacity: "0.7" }}>
+                          No Trailer available
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
+                <div className="itemdetail-header-overview">
+                  <h4>Overview</h4>
+                  <p>{props.details.overview}</p>
+                </div>
+                {props.credits.crew.length > 0 && (
+                  <div className="itemdetail-header-crew">
+                    <h4>Featured Crew</h4>
+                    <div className="itemdetail-header-crew-members">
+                      {props.credits.crew.map((member, i) => {
+                        if (i < 3) {
+                          return (
+                            <div key={member.i}>
+                              <h6>{member.name}</h6>
+                              <p>{member.job}</p>
+                            </div>
+                          );
+                        }
+                      })}
+                    </div>
+                  </div>
+                )}
               </div>
-              <div className="itemdetail-header-overview">
-                <h4>Overview</h4>
-                <p>{props.details.overview}</p>
-              </div>
-              {props.credits.crew.length > 0 && (
-                <div className="itemdetail-header-crew">
-                  <h4>Featured Crew</h4>
-                  <div className="itemdetail-header-crew-members">
-                    {props.credits.crew.map((member, i) => {
-                      if (i < 3) {
+            </section>
+          </div>
+        </div>
+      </header>
+      <main>
+        <div className="itemdetail-main-grid">
+          <section className="section-one">
+            <div className="itemdetail-cast">
+              {props.credits.cast.length > 0 && (
+                <div>
+                  <h4>Top Billed Cast</h4>
+                  <div className="itemdetail-cast-members">
+                    {props.credits.cast.map((member, i) => {
+                      if (i < 5) {
                         return (
-                          <div key={member.i}>
-                            <h6>{member.name}</h6>
-                            <p>{member.job}</p>
+                          <div className="cast-card" key={member.i}>
+                            <div>
+                              <img
+                                className="cast-profile"
+                                src={castLink(member.profile_path)}
+                                alt=""
+                              />
+                            </div>
+                            <div className="cast-text">
+                              <h6>{member.name}</h6>
+                              <p>{member.character}</p>
+                            </div>
                           </div>
                         );
                       }
@@ -165,10 +191,149 @@ const ItemDetailsHeader = props => {
                 </div>
               )}
             </div>
+            {props.reviews.results.length > 0 && (
+              <div className="itemdetail-reviews">
+                <hr />
+                <div className="review-title">
+                  <h4 style={{ display: "flex" }}>
+                    Reviews{" "}
+                    {props.reviews.results.length > 2
+                      ? "2"
+                      : props.reviews.results.length}
+                  </h4>
+                  <div className="itemdetail-reviews-items">
+                    {props.reviews.results.map((item, i) => {
+                      if (i < 2) {
+                        return (
+                          <div className="review-card" key={item.i}>
+                            <div className="review-text">
+                              <p>
+                                "
+                                {item.content.length > 1000
+                                  ? `${item.content.substring(0, 1000)}...`
+                                  : item.content}
+                                "
+                              </p>
+                              <span>- {item.author}</span>
+                            </div>
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </section>
+          <section className="section-two">
+            <div className="itemdetail-social-icons">
+              {props.social.twitter_id && (
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://www.twitter.com/${props.social.twitter_id}`}>
+                  <i className="fab fa-twitter-square" />
+                </a>
+              )}
+              {props.social.facebook_id && (
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://www.facebook.com/${props.social.facebook_id}`}>
+                  <i className="fab fa-facebook-square" />
+                </a>
+              )}
+              {props.social.instagram_id && (
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://www.facebook.com/${props.social.instagram_id}`}>
+                  <i className="fab fa-instagram" />
+                </a>
+              )}
+              {props.details.homepage && (
+                <span>
+                  <p>
+                    <span style={{ opacity: "0.3" }}> |</span>
+                    <a
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href={`${props.details.homepage}`}>
+                      <i className="fas fa-link fa-sm" />
+                    </a>
+                  </p>
+                </span>
+              )}
+            </div>
+            <div className="itemdetail-facts">
+              <h5>Facts</h5>
+              <div className="itemdetail-status">
+                <h6>Status</h6>
+                <p>{props.details.status}</p>
+              </div>
+              <div className="itemdetail-release-date">
+                <h6>Release Date</h6>
+                <p>
+                  {moment(
+                    props.details.release_date || props.details.first_air_date
+                  ).format("MMMM D, YYYY")}
+                </p>
+              </div>
+              <div className="itemdetail-language">
+                <h6>Original Language</h6>
+                <p>{getCountryName(language)}</p>
+              </div>
+              {runTime && (
+                <div className="itemdetail-runtime">
+                  <h6>Runtime</h6>
+                  <div className="itemdetail-runtime-data">
+                    <p>
+                      {Math.floor(runTime / 60)
+                        ? `${Math.floor(runTime / 60)}h`
+                        : ""}
+                    </p>
+                    <p>{runTime % 60 ? `${runTime % 60}m` : ""}</p>
+                  </div>
+                </div>
+              )}
+              {props.details.budget > 100 && (
+                <div className="itemdetail-budget">
+                  <h6>Budget</h6>
+                  <p>
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD"
+                    }).format(props.details.budget)}
+                  </p>
+                </div>
+              )}
+              {props.details.revenue > 100 && (
+                <div className="itemdetail-revenue">
+                  <h6>Revenue</h6>
+                  <p>
+                    {new Intl.NumberFormat("en-US", {
+                      style: "currency",
+                      currency: "USD"
+                    }).format(props.details.revenue)}
+                  </p>
+                </div>
+              )}
+              {props.details.genres && (
+                <div className="itemdetail-genres">
+                  <h6>Genres</h6>
+                  <div>
+                    {props.details.genres &&
+                      props.details.genres.map(genre => (
+                        <p key={genre.id}>{genre.name}</p>
+                      ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </section>
         </div>
-      </div>
-    </header>
+      </main>
+    </div>
   );
 };
 

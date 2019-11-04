@@ -21,6 +21,7 @@ import postMoviesTopRated from "./movieReducers/postMoviesTopRated";
 import postMoviesUpcoming from "./movieReducers/postMoviesUpcoming";
 import getMovieDetails from "./movieReducers/getMovieDetails";
 import getMovieCredits from "./movieReducers/getMovieCredits";
+import getMovieExternalIDs from "./movieReducers/getMovieExternalIDs";
 import getMovieTrailers from "./movieReducers/getMovieTrailers";
 import getMovieReviews from "./movieReducers/getMovieReviews";
 import getMovieFavorites from "./movieReducers/getMovieFavorites";
@@ -33,6 +34,7 @@ import postTVOnTheAir from "./TVReducers/postTVOnTheAir";
 import postTVTopRated from "./TVReducers/postTVTopRated";
 import getTVDetails from "./TVReducers/getTVDetails";
 import getTVCredits from "./TVReducers/getTVCredits";
+import getTVExternalIDs from "./TVReducers/getTVExternalIDs";
 import getTVTrailers from "./TVReducers/getTVTrailers";
 import getTVReviews from "./TVReducers/getTVReviews";
 import getTVFavorites from "./TVReducers/getTVFavorites";
@@ -67,6 +69,7 @@ const rootReducer = combineReducers({
   postMoviesUpcoming,
   getMovieDetails,
   getMovieCredits,
+  getMovieExternalIDs,
   getMovieTrailers,
   getMovieReviews,
   getMovieFavorites,
@@ -79,6 +82,7 @@ const rootReducer = combineReducers({
   postTVTopRated,
   getTVDetails,
   getTVCredits,
+  getTVExternalIDs,
   getTVTrailers,
   getTVReviews,
   getTVFavorites,
