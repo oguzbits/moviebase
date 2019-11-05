@@ -72,9 +72,10 @@ const ItemDetailsHeader = props => {
     </ChangingProgressProvider>
   );
 
-  const runTime = props.details.runtime
-    ? props.details.runtime
-    : props.details.episode_run_time[0];
+  const runTime =
+    props.details.runtime ||
+    (props.details.episode_run_time ? props.details.episode_run_time[0] : "") ||
+    "";
   const language = props.details.original_language;
   return (
     <div className="itemdetail-mainheader">
@@ -142,16 +143,15 @@ const ItemDetailsHeader = props => {
                   <div className="itemdetail-header-crew">
                     <h4>Featured Crew</h4>
                     <div className="itemdetail-header-crew-members">
-                      {props.credits.crew.map((member, i) => {
-                        if (i < 3) {
-                          return (
-                            <div key={member.i}>
+                      {props.credits.crew.map(
+                        (member, i) =>
+                          i < 3 && (
+                            <div key={i}>
                               <h6>{member.name}</h6>
                               <p>{member.job}</p>
                             </div>
-                          );
-                        }
-                      })}
+                          )
+                      )}
                     </div>
                   </div>
                 )}
@@ -166,12 +166,12 @@ const ItemDetailsHeader = props => {
             <div className="itemdetail-cast">
               {props.credits.cast.length > 0 && (
                 <div>
-                  <h4>Top Billed Cast</h4>
+                  <h4 style={{ letterSpacing: "1.5px" }}>Top Billed Cast</h4>
                   <div className="itemdetail-cast-members">
-                    {props.credits.cast.map((member, i) => {
-                      if (i < 5) {
-                        return (
-                          <div className="cast-card" key={member.i}>
+                    {props.credits.cast.map(
+                      (member, i) =>
+                        i < 5 && (
+                          <div className="cast-card" key={i}>
                             <div>
                               <img
                                 className="cast-profile"
@@ -184,9 +184,8 @@ const ItemDetailsHeader = props => {
                               <p>{member.character}</p>
                             </div>
                           </div>
-                        );
-                      }
-                    })}
+                        )
+                    )}
                   </div>
                 </div>
               )}
@@ -202,10 +201,10 @@ const ItemDetailsHeader = props => {
                       : props.reviews.results.length}
                   </h4>
                   <div className="itemdetail-reviews-items">
-                    {props.reviews.results.map((item, i) => {
-                      if (i < 2) {
-                        return (
-                          <div className="review-card" key={item.i}>
+                    {props.reviews.results.map(
+                      (item, i) =>
+                        i < 2 && (
+                          <div className="review-card" key={i}>
                             <div className="review-text">
                               <p>
                                 "
@@ -217,9 +216,8 @@ const ItemDetailsHeader = props => {
                               <span>- {item.author}</span>
                             </div>
                           </div>
-                        );
-                      }
-                    })}
+                        )
+                    )}
                   </div>
                 </div>
               </div>

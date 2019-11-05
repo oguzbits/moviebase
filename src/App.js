@@ -10,6 +10,7 @@ import ScrollToTop from "./components/scrollToTop/scrollToTop";
 import LandingPage from "./pages/landingPage/landingPage";
 import Discover from "./pages/discover/discover";
 import ItemDetails from "./pages/itemDetails/itemDetails";
+import SearchResult from "./pages/searchResult/searchResult";
 // import NavBar from "./components/navBar/navBar";
 // import Footer from "./components/footer/footer";
 
@@ -37,6 +38,7 @@ const App = props => {
         <Route path="/" exact component={LandingPage} />
         <Route path="/discover" component={Discover} />
         <Route path="/details/:type/:id" component={ItemDetails} />
+        <Route path="/search-results/:id" component={SearchResult} />
         {/* <Footer /> */}
       </div>
     </BrowserRouter>

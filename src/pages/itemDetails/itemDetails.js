@@ -98,7 +98,6 @@ const ItemDetails = props => {
           MDBConfig={props.MDBConfig}
           type={props.itemType}
         />
-        <main></main>
       </div>
     </div>
   );

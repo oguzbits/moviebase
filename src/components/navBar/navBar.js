@@ -21,7 +21,7 @@ const NavBar = props => {
     props.history.push("/");
   };
 
-  const [search, setSearch] = useState("");
+  const [search, setSearch] = useState(null);
 
   return (
     <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">

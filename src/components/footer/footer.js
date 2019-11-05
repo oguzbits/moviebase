@@ -6,9 +6,9 @@ import "./footer.scss";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className="footer-main">
       <div className="section-1">
-        <header>
+        <header className="footer-header">
           <div>
             <img src={Movielogo} width="40" height="40" alt="" />
           </div>

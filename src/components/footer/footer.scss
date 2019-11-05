@@ -1,4 +1,4 @@
-footer {
+.footer-main {
   min-height: 40vh;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -30,7 +30,7 @@ footer {
     font-size: 0.8rem;
     opacity: 0.8;
   }
-  header {
+  .footer-header {
     display: flex;
     flex-direction: row;
     h2 {
