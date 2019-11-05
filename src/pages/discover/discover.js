@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import moment from "moment";
+
+import CardItem from "../../components/cardItem/cardItem";
 
 import NavBar from "../../components/navBar/navBar";
 import Footer from "../../components/footer/footer";
@@ -14,8 +14,6 @@ import keyword_ids from "../../components/discoverForms/keyword_ids.json";
 
 import { Dropdown } from "semantic-ui-react";
 import Pagination from "../../components/pagination";
-
-import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
 import "./discover.scss";
@@ -208,76 +206,14 @@ const Discover = props => {
                 item =>
                   imageSource(item) &&
                   item.overview && (
-                    <Link
-                      to={`/details/${props.itemType.toLowerCase()}/${item.id}`}
-                      key={item.id}
-                      id="card-container"
-                      className="card">
-                      <div id="card-grid">
-                        <div className="card">
-                          <img
-                            src={imageSource(item)}
-                            alt="..."
-                            className="card-img"
-                          />
-                        </div>
-                        <div className="card">
-                          <div className="card-body">
-                            <div className="card-title">
-                              <div>
-                                <CircularProgressbar
-                                  className="circularprogressbar"
-                                  styles={buildStyles({
-                                    textSize: "45px",
-                                    pathColor: `${pathTrailColor(
-                                      item.vote_average
-                                    )}`,
-                                    textColor: "#fff",
-                                    trailColor: "black",
-                                    backgroundColor: "black"
-                                  })}
-                                  strokeWidth={10}
-                                  background
-                                  backgroundPadding={6}
-                                  value={item.vote_average * 10}
-                                  // text={`${item.vote_average * 10}`}
-                                  text={
-                                    <tspan dy={2.5}>
-                                      {item.vote_average * 10}
-                                    </tspan>
-                                  }
-                                />
-                              </div>
-                              <div>{item.title || item.name}</div>
-                            </div>
-                            <p
-                              className="card-text"
-                              style={
-                                ({ minHeight: "85px" }, { maxHeight: "85px" })
-                              }>
-                              {item.overview.length > 200
-                                ? `${item.overview.substring(0, 200)}...`
-                                : item.overview}
-                            </p>
-                          </div>
-                          <div
-                            id="footer-container"
-                            className={
-                              item.vote_average >= 7
-                                ? "card-footer text-muted border-success"
-                                : "card-footer text-muted border-warning"
-                            }>
-                            <div className="card-footer">
-                              <small className="text-muted">
-                                {moment(
-                                  item.release_date || item.first_air_date
-                                ).format("MMMM D, YYYY")}
-                              </small>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
+                    <div>
+                      <CardItem
+                        item={item}
+                        type={props.itemType}
+                        pathcolor={pathTrailColor(item.vote_average)}
+                        image={imageSource(item)}
+                      />
+                    </div>
                   )
               )
             ) : (

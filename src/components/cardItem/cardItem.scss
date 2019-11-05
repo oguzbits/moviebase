@@ -1,0 +1,58 @@
+.card {
+  text-align: left;
+  color: white;
+  background-color: #282c34;
+  .card-img {
+    min-height: 240px;
+  }
+  transition: filter 0.2s ease-in-out;
+  &:hover {
+    .card {
+      filter: brightness(120%);
+      cursor: pointer;
+    }
+  }
+  text-decoration: none;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
+  }
+}
+#card-grid {
+  display: grid;
+  grid-template-columns: 35% 65%;
+}
+#card-container {
+  max-width: 390px;
+}
+
+.card-body {
+  font-weight: 300;
+}
+
+.card-title {
+  font-family: "Helvetica", sans-serif;
+  font-weight: bold;
+  display: grid;
+  grid-template-columns: 14% 87%;
+  grid-column-gap: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-text {
+  font-weight: 300;
+  line-height: 1rem;
+  font-size: 0.8rem;
+}
+#footer-container {
+  border-top: 2px solid;
+}
+.card-footer {
+  display: flex;
+  justify-content: flex-start;
+  border-top: none;
+}
