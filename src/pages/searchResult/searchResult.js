@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import moment from "moment";
 
 import searchData from "../../actions/searchData";
-import postSearchResults from "../../actions/postSearchResults";
 
 import NavBar from "../../components/navBar/navBar";
 import Footer from "../../components/footer/footer";

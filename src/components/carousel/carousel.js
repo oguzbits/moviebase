@@ -65,9 +65,10 @@ const Carousel = props => {
       <hr />
       <h4 className="carousel-title">{props.title.toUpperCase()}</h4>
       <Slider {...settings} style={{ textAlign: "center" }}>
-        {props.items.map(item => (
+        {props.items.map((item, i) => (
           <div>
             <CardItem
+              key={i}
               item={item}
               type={props.type}
               pathcolor={pathTrailColor(item.vote_average)}

@@ -6,6 +6,7 @@ import ModalVideo from "react-modal-video";
 import { getCountryName } from "./getCountryName";
 // import ReactTooltip from "react-tooltip";
 
+import "../../../node_modules/react-modal-video/scss/modal-video.scss";
 import "react-circular-progressbar/dist/styles.css";
 import "./itemDetailsHeader.scss";
 
