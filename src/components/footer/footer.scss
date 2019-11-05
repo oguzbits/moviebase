@@ -38,19 +38,18 @@
       letter-spacing: 0.1rem;
     }
   }
-}
-
-.social-icons {
-  padding-bottom: 2rem;
-  font-size: 1.5rem;
-  a {
-    color: white;
-    opacity: 0.8;
-    padding: 0 0.2rem;
-    transition: 0.3s;
-    &:hover {
-      opacity: 1;
-      color: rgb(0, 255, 255);
+  .social-icons {
+    padding-bottom: 2rem;
+    font-size: 1.5rem;
+    a {
+      color: white;
+      opacity: 0.8;
+      padding: 0 0.2rem;
+      transition: 0.3s;
+      &:hover {
+        opacity: 1;
+        color: rgb(0, 255, 255);
+      }
     }
   }
 }
