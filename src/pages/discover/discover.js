@@ -19,6 +19,9 @@ import "react-circular-progressbar/dist/styles.css";
 import "./discover.scss";
 
 const Discover = props => {
+  const apiKey = props.apiKey;
+  const itemType = props.itemType;
+
   const currentYear = new Date().getFullYear();
 
   const [sortBy, setSortBy] = useState("popularity.desc");
@@ -30,26 +33,21 @@ const Discover = props => {
 
   useEffect(() => {
     handleGetDiscover();
-  }, [props.apiKey, props.itemType, sortBy, genres, keywords, year, page]);
+  }, [apiKey, itemType, sortBy, genres, keywords, year, page]);
 
   const handleGetDiscover = () => {
     props.getDiscover(
-      `https://api.themoviedb.org/3/discover/${props.itemType.toLowerCase()}?api_key=${
-        props.apiKey
-      }&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false
+      `https://api.themoviedb.org/3/discover/${itemType.toLowerCase()}?api_key=${apiKey}&language=en-US&sort_by=${sortBy}&include_adult=false&include_video=false
      &page=${page}&with_genres=${genres.value ? genres.value : []}${
         keywords.value ? `&with_keywords=${keywords.value}` : ""
       }${
-        props.itemType === "TV"
-          ? "&first_air_date_year="
-          : "&primary_release_year="
+        itemType === "TV" ? "&first_air_date_year=" : "&primary_release_year="
       }${year}`
     );
   };
 
   const handleGenreList = () => {
-    let genreType =
-      props.itemType === "MOVIE" ? props.movieGenres : props.TVGenres;
+    let genreType = itemType === "MOVIE" ? props.movieGenres : props.TVGenres;
     let List = genreType.map(genre => ({
       key: genre.id,
       text: genre.name,
@@ -108,128 +106,130 @@ const Discover = props => {
   };
   return (
     <div>
-      <NavBar />
-      <div className="discover-main">
-        <header>
-          <h1>DISCOVER</h1>
-          <hr />
-          <div className="discover-subheader">
-            <h3
-              id="header-movies"
-              style={{
-                textDecoration: props.itemType === "TV" ? "" : "underline"
-              }}
-              onClick={() => {
-                props.setItemType("MOVIE");
-                setPage(1);
-              }}>
-              Movies
-            </h3>
-            <h3
-              id="header-tvshows"
-              style={{
-                textDecoration: props.itemType === "TV" ? "underline" : ""
-              }}
-              onClick={() => {
-                props.setItemType("TV");
-                setPage(1);
-              }}>
-              TV Shows
-            </h3>
-          </div>
-          <form className="discover-header-form">
-            <div className="discover-header-form-container">
-              <div className="select-year">
-                <h6>Year</h6>
-                <Dropdown
-                  defaultValue={currentYear}
-                  fluid
-                  selection
-                  onChange={(...args) => {
-                    setYear(args[1].value);
-                  }}
-                  options={handleYearList(yearList)}
-                />
-              </div>
-              <div className="select-sortby">
-                <h6>Sort By</h6>
-                <Dropdown
-                  defaultValue={options[0].value}
-                  fluid
-                  selection
-                  onChange={(...args) => {
-                    setSortBy(args[1].value);
-                  }}
-                  options={options}
-                />
-              </div>
-              <div className="select-genres">
-                <h6>Genres</h6>
-                <Dropdown
-                  placeholder="Filter by genres..."
-                  fluid
-                  multiple
-                  search
-                  selection
-                  onChange={(...args) => {
-                    setGenres({ value: args[1].value });
-                  }}
-                  clearable
-                  options={handleGenreList()}
-                />
-              </div>
-              <div className="select-keywords">
-                <h6>Keywords</h6>
-                <Dropdown
-                  placeholder="Filter by keywords..."
-                  fluid
-                  multiple
-                  search
-                  selection
-                  onSearchChange={(...args) => {
-                    handleKeywordList(args[1].searchQuery);
-                  }}
-                  onChange={(...args) => {
-                    setKeywords({ value: args[1].value });
-                  }}
-                  clearable
-                  options={keywordInput}
-                />
-              </div>
+      <div>
+        <NavBar />
+        <div className="discover-main">
+          <header>
+            <h1>DISCOVER</h1>
+            <hr />
+            <div className="discover-subheader">
+              <h3
+                id="header-movies"
+                style={{
+                  textDecoration: itemType === "TV" ? "" : "underline"
+                }}
+                onClick={() => {
+                  props.setItemType("MOVIE");
+                  setPage(1);
+                }}>
+                Movies
+              </h3>
+              <h3
+                id="header-tvshows"
+                style={{
+                  textDecoration: itemType === "TV" ? "underline" : ""
+                }}
+                onClick={() => {
+                  props.setItemType("TV");
+                  setPage(1);
+                }}>
+                TV Shows
+              </h3>
             </div>
-          </form>
-        </header>
-        <main className="discover-main">
-          <div className="card-wrapper">
-            {props.discover.results.length > 0 ? (
-              props.discover.results.map(
-                (item, i) =>
-                  imageSource(item) &&
-                  item.overview && (
-                    <div key={i}>
-                      <CardItem
-                        item={item}
-                        type={props.itemType}
-                        pathcolor={pathTrailColor(item.vote_average)}
-                        image={imageSource(item)}
-                      />
-                    </div>
-                  )
-              )
-            ) : (
-              <h2 style={{ color: "white" }} className="discover-warning">
-                No results found
-              </h2>
-            )}
+            <form className="discover-header-form">
+              <div className="discover-header-form-container">
+                <div className="select-year">
+                  <h6>Year</h6>
+                  <Dropdown
+                    defaultValue={currentYear}
+                    fluid
+                    selection
+                    onChange={(...args) => {
+                      setYear(args[1].value);
+                    }}
+                    options={handleYearList(yearList)}
+                  />
+                </div>
+                <div className="select-sortby">
+                  <h6>Sort By</h6>
+                  <Dropdown
+                    defaultValue={options[0].value}
+                    fluid
+                    selection
+                    onChange={(...args) => {
+                      setSortBy(args[1].value);
+                    }}
+                    options={options}
+                  />
+                </div>
+                <div className="select-genres">
+                  <h6>Genres</h6>
+                  <Dropdown
+                    placeholder="Filter by genres..."
+                    fluid
+                    multiple
+                    search
+                    selection
+                    onChange={(...args) => {
+                      setGenres({ value: args[1].value });
+                    }}
+                    clearable
+                    options={handleGenreList()}
+                  />
+                </div>
+                <div className="select-keywords">
+                  <h6>Keywords</h6>
+                  <Dropdown
+                    placeholder="Filter by keywords..."
+                    fluid
+                    multiple
+                    search
+                    selection
+                    onSearchChange={(...args) => {
+                      handleKeywordList(args[1].searchQuery);
+                    }}
+                    onChange={(...args) => {
+                      setKeywords({ value: args[1].value });
+                    }}
+                    clearable
+                    options={keywordInput}
+                  />
+                </div>
+              </div>
+            </form>
+          </header>
+          <main className="discover-main">
+            <div className="card-wrapper">
+              {props.discover.results.length > 0 ? (
+                props.discover.results.map(
+                  (item, i) =>
+                    imageSource(item) &&
+                    item.overview && (
+                      <div key={i}>
+                        <CardItem
+                          item={item}
+                          type={itemType}
+                          pathcolor={pathTrailColor(item.vote_average)}
+                          image={imageSource(item)}
+                        />
+                      </div>
+                    )
+                )
+              ) : (
+                <h2 style={{ color: "white" }} className="discover-warning">
+                  No results found
+                </h2>
+              )}
+            </div>
+          </main>
+          <div className="discover-pagination">
+            <Pagination
+              itemsCount={200}
+              pageSize={20}
+              currentPage={page}
+              onPageChange={page => setPage(page)}
+            />
           </div>
-        </main>
-        <div className="discover-pagination">
-          <Pagination
-            itemsCount={200}
-            pageSize={20}
-            currentPage={page}
-            onPageChange={page => setPage(page)}
-          />
         </div>
       </div>
       <Footer />

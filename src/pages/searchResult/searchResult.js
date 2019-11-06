@@ -12,17 +12,21 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "./searchResult.scss";
 
 const SearchResult = props => {
+  const apiKey = props.apiKey;
+  const params = props.match.params.id;
+
+  const getSearchData = searchInput => {
+    props.searchData(
+      `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1&include_adult=false`
+    );
+  };
+
   useEffect(() => {
-    const getSearchData = searchInput => {
-      props.searchData(
-        `https://api.themoviedb.org/3/search/multi?api_key=${props.apiKey}&language=en-US&query=${searchInput}&page=1&include_adult=false`
-      );
-    };
-    getSearchData(props.match.params.id);
+    getSearchData(params);
     // return () => {
-    //   getSearchData(props.match.params.id);
+    //   getSearchData(params);
     // };
-  }, [props.apiKey, props.match.params.id]);
+  }, [apiKey, params]);
 
   const pathTrailColor = rating => {
     return rating >= 7
@@ -42,12 +46,12 @@ const SearchResult = props => {
       <div className="searchresult-main">
         <NavBar />
         <header className="searchresult-header">
-          <h1>Searchresults for "{props.match.params.id}"</h1>
+          <h1>Searchresults for "{params}"</h1>
         </header>
         <div className="searchresult-body">
           <hr />
           <div className="card-wrapper">
-            {props.searchDataResults.results &&
+            {props.searchDataResults.results !== 0 ? (
               props.searchDataResults.results.map(
                 item =>
                   imageSource(item) &&
@@ -125,13 +129,9 @@ const SearchResult = props => {
                     </Link>
                   )
               )
-            //   )
-            //   : (
-            //     <h2 style={{ color: "white" }} className="discover-warning">
-            //       No results found
-            //     </h2>
-            //   )
-            }
+            ) : (
+              <h2 style={{ color: "white" }}>No results found</h2>
+            )}
           </div>
         </div>
       </div>
