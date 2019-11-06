@@ -32,21 +32,18 @@
       .itemdetail-header-grid {
         justify-content: center;
         padding-top: 30vh;
-        @media only screen and (max-width: 1050px) {
+        @media only screen and (max-width: 1020px) {
           padding-top: 10vh;
           display: flex;
           flex-flow: wrap;
           .itemdetail-header-poster {
             width: 150px;
-          }
-          .details-trailer {
-            justify-content: center;
+            padding-bottom: 10vh;
           }
           .itemdetail-header-text {
-            padding-top: 10vh;
-            margin-right: 50px;
+            margin: 0 50px 0 50px;
             @media only screen and (max-width: 600px) {
-              padding: 10vh 30px 0 30px;
+              padding: 0 30px 0 30px;
             }
           }
         }
@@ -56,6 +53,7 @@
         }
         display: grid;
         grid-template-columns: 300px 700px;
+        grid-column-gap: 50px;
         .itemdetail-title {
           display: flex;
           flex-flow: wrap;
