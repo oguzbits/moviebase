@@ -9,12 +9,14 @@ import getMovieDetails from "../../actions/movieActions/getMovieDetails";
 import getMovieCredits from "../../actions/movieActions/getMovieCredits";
 import getMovieTrailers from "../../actions/movieActions/getMovieTrailers";
 import getMovieReviews from "../../actions/movieActions/getMovieReviews";
+import getMovieRecommendations from "../../actions/movieActions/getMovieRecommendations";
 import getMovieExternalIDs from "../../actions/movieActions/getMovieExternalIDs";
 
 import getTVDetails from "../../actions/TVActions/getTVDetails";
 import getTVCredits from "../../actions/TVActions/getTVCredits";
 import getTVTrailers from "../../actions/TVActions/getTVTrailers";
 import getTVReviews from "../../actions/TVActions/getTVReviews";
+import getTVRecommendations from "../../actions/TVActions/getTVRecommendations";
 import getTVExternalIDs from "../../actions/TVActions/getTVExternalIDs";
 
 import "./itemDetails.scss";
@@ -38,6 +40,9 @@ const ItemDetails = props => {
       props.getMovieReviews(
         `https://api.themoviedb.org/3/movie/${id}/reviews?api_key=${props.apiKey}&language=en-US`
       );
+      props.getMovieRecommendations(
+        `https://api.themoviedb.org/3/movie/${id}/recommendations?api_key=${props.apiKey}&language=en-US`
+      );
       props.getMovieExternalIDs(
         `https://api.themoviedb.org/3/movie/${id}/external_ids?api_key=${props.apiKey}`
       );
@@ -53,6 +58,9 @@ const ItemDetails = props => {
       );
       props.getTVReviews(
         `https://api.themoviedb.org/3/tv/${id}/reviews?api_key=${props.apiKey}&language=en-US`
+      );
+      props.getTVRecommendations(
+        `https://api.themoviedb.org/3/tv/${id}/recommendations?api_key=${props.apiKey}&language=en-US`
       );
       props.getTVExternalIDs(
         `https://api.themoviedb.org/3/tv/${id}/external_ids?api_key=${props.apiKey}`
@@ -89,6 +97,11 @@ const ItemDetails = props => {
               ? props.movieReviews
               : props.TVReviews
           }
+          recommendations={
+            props.match.params.type === "movie"
+              ? props.movieRecommendations
+              : props.TVRecommendations
+          }
           social={
             props.match.params.type === "movie"
               ? props.movieExternalIDs
@@ -115,12 +128,14 @@ const mapStateToProps = state => ({
   movieCredits: state.getMovieCredits,
   movieTrailers: state.getMovieTrailers,
   movieReviews: state.getMovieReviews,
+  movieRecommendations: state.getMovieRecommendations,
   movieExternalIDs: state.getMovieExternalIDs,
 
   TVDetails: state.getTVDetails,
   TVCredits: state.getTVCredits,
   TVTrailers: state.getTVTrailers,
   TVReviews: state.getTVReviews,
+  TVRecommendations: state.getTVRecommendations,
   TVExternalIDs: state.getTVExternalIDs
 });
 
@@ -129,12 +144,14 @@ const mapDispatchToProps = dispatch => ({
   getMovieCredits: url => dispatch(getMovieCredits(url)),
   getMovieTrailers: url => dispatch(getMovieTrailers(url)),
   getMovieReviews: url => dispatch(getMovieReviews(url)),
+  getMovieRecommendations: url => dispatch(getMovieRecommendations(url)),
   getMovieExternalIDs: url => dispatch(getMovieExternalIDs(url)),
 
   getTVDetails: url => dispatch(getTVDetails(url)),
   getTVCredits: url => dispatch(getTVCredits(url)),
   getTVTrailers: url => dispatch(getTVTrailers(url)),
   getTVReviews: url => dispatch(getTVReviews(url)),
+  getTVRecommendations: url => dispatch(getTVRecommendations(url)),
   getTVExternalIDs: url => dispatch(getTVExternalIDs(url))
 });
 

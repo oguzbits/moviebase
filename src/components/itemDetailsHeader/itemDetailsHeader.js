@@ -3,17 +3,42 @@ import moment from "moment";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 import ModalVideo from "react-modal-video";
+import Slider from "react-slick";
 import { getCountryName } from "./getCountryName";
+import CardItem from "../cardItem/cardItem";
 // import ReactTooltip from "react-tooltip";
 
 import "../../../node_modules/react-modal-video/scss/modal-video.scss";
 import "react-circular-progressbar/dist/styles.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./itemDetailsHeader.scss";
 
 const ItemDetailsHeader = props => {
   const [isOpen, setIsOpen] = useState(false);
   const [trailerID, setTrailerID] = useState(false);
   const [site, setSite] = useState("");
+
+  const settings = {
+    infinite: true,
+    slidesToShow: 2,
+    slidesToScroll: 2,
+    initialSlide: 0,
+    autoplay: true,
+    speed: 700,
+    autoplaySpeed: 15000,
+    cssEase: "linear",
+    responsive: [
+      {
+        breakpoint: 790,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 0
+        }
+      }
+    ]
+  };
 
   const config = props.MDBConfig.images;
   const backgroundImgLink = config
@@ -78,6 +103,14 @@ const ItemDetailsHeader = props => {
     (props.details.episode_run_time ? props.details.episode_run_time[0] : "") ||
     "";
   const language = props.details.original_language;
+
+  const imageSource = item => {
+    return config
+      ? config.secure_base_url + config.poster_sizes[0] + item.poster_path ||
+          item.backdrop_path
+      : "";
+  };
+
   return (
     <div className="itemdetail-mainheader">
       <header className="itemdetail-header" style={headerImg}>
@@ -164,65 +197,87 @@ const ItemDetailsHeader = props => {
       <main>
         <div className="itemdetail-main-grid">
           <section className="section-one">
-            <div className="itemdetail-cast">
-              {props.credits.cast.length > 0 && (
-                <div>
-                  <h4 style={{ letterSpacing: "1.5px" }}>Top Billed Cast</h4>
-                  <div className="itemdetail-cast-members">
-                    {props.credits.cast.map(
-                      (member, i) =>
-                        i < 5 && (
-                          <div className="cast-card" key={i}>
-                            <div>
-                              <img
-                                className="cast-profile"
-                                src={castLink(member.profile_path)}
-                                alt=""
-                              />
+            <div>
+              <div className="itemdetail-cast">
+                {props.credits.cast.length > 0 && (
+                  <div>
+                    <h4 style={{ letterSpacing: "1.5px" }}>Top Billed Cast</h4>
+                    <div className="itemdetail-cast-members">
+                      {props.credits.cast.map(
+                        (member, i) =>
+                          i < 5 && (
+                            <div className="cast-card" key={i}>
+                              <div>
+                                <img
+                                  className="cast-profile"
+                                  src={castLink(member.profile_path)}
+                                  alt=""
+                                />
+                              </div>
+                              <div className="cast-text">
+                                <h6>{member.name}</h6>
+                                <p>{member.character}</p>
+                              </div>
                             </div>
-                            <div className="cast-text">
-                              <h6>{member.name}</h6>
-                              <p>{member.character}</p>
+                          )
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+              {props.reviews.results.length > 0 && (
+                <div className="itemdetail-reviews">
+                  <hr />
+                  <div className="review-title">
+                    <h4 style={{ display: "flex" }}>
+                      Reviews{" "}
+                      {props.reviews.results.length > 2
+                        ? "2"
+                        : props.reviews.results.length}
+                    </h4>
+                    <div className="itemdetail-reviews-items">
+                      {props.reviews.results.map(
+                        (item, i) =>
+                          i < 2 && (
+                            <div className="review-card" key={i}>
+                              <div className="review-text">
+                                <p>
+                                  "
+                                  {item.content.length > 1000
+                                    ? `${item.content.substring(0, 1000)}...`
+                                    : item.content}
+                                  "
+                                </p>
+                                <span>- {item.author}</span>
+                              </div>
                             </div>
-                          </div>
-                        )
-                    )}
+                          )
+                      )}
+                    </div>
                   </div>
                 </div>
               )}
-            </div>
-            {props.reviews.results.length > 0 && (
-              <div className="itemdetail-reviews">
-                <hr />
-                <div className="review-title">
-                  <h4 style={{ display: "flex" }}>
-                    Reviews{" "}
-                    {props.reviews.results.length > 2
-                      ? "2"
-                      : props.reviews.results.length}
+              {props.recommendations.results.length > 0 && (
+                <div className="itemdetail-carousel">
+                  <hr />
+                  <h4 className="carousel-title">
+                    Recommendations {props.recommendations.results.length}
                   </h4>
-                  <div className="itemdetail-reviews-items">
-                    {props.reviews.results.map(
-                      (item, i) =>
-                        i < 2 && (
-                          <div className="review-card" key={i}>
-                            <div className="review-text">
-                              <p>
-                                "
-                                {item.content.length > 1000
-                                  ? `${item.content.substring(0, 1000)}...`
-                                  : item.content}
-                                "
-                              </p>
-                              <span>- {item.author}</span>
-                            </div>
-                          </div>
-                        )
-                    )}
-                  </div>
+                  <Slider {...settings} style={{ textAlign: "center" }}>
+                    {props.recommendations.results.map((item, i) => (
+                      <div key={i}>
+                        <CardItem
+                          item={item}
+                          type={props.type}
+                          pathcolor={pathTrailColor(item.vote_average)}
+                          image={imageSource(item)}
+                        />
+                      </div>
+                    ))}
+                  </Slider>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </section>
           <section className="section-two">
             <div className="itemdetail-social-icons">

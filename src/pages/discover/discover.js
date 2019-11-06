@@ -203,10 +203,10 @@ const Discover = props => {
           <div className="card-wrapper">
             {props.discover.results.length > 0 ? (
               props.discover.results.map(
-                item =>
+                (item, i) =>
                   imageSource(item) &&
                   item.overview && (
-                    <div>
+                    <div key={i}>
                       <CardItem
                         item={item}
                         type={props.itemType}

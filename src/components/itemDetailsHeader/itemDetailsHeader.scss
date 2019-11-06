@@ -1,6 +1,6 @@
 .itemdetail-mainheader {
   font-family: "Roboto", sans-serif;
-  background-color: rgb(27, 27, 27);
+  background-color: #212224;
   color: white;
   p {
     font-weight: 300;
@@ -15,7 +15,7 @@
   .itemdetail-header {
     background-size: cover !important;
     height: 350px;
-    @media (min-width: 1050px) {
+    @media screen and (min-width: 1050px) {
       height: 100vh;
     }
     width: 100%;
@@ -23,17 +23,25 @@
       .itemdetail-header-grid {
         justify-content: center;
         padding-top: 30vh;
-        @media (max-width: 1050px) {
+        @media screen and (max-width: 1050px) {
           padding-top: 10vh;
           display: flex;
           flex-flow: wrap;
           .itemdetail-header-poster {
             width: 150px;
           }
+          .details-trailer {
+            justify-content: center;
+          }
+          .itemdetail-header-text {
+            padding: 10vh 50px 0 50px;
+          }
+        }
+        .itemdetail-header-text {
+          margin-left: 50px;
         }
         display: grid;
         grid-template-columns: 300px 700px;
-        grid-gap: 50px;
         .itemdetail-title {
           display: flex;
           h4 {
@@ -94,17 +102,36 @@
     grid-gap: 50px;
     padding-top: 50px;
     justify-content: center;
-    @media (max-width: 1050px) {
-      padding-top: 400px;
+    @media screen and (max-width: 1050px) {
+      display: flex;
+      flex-direction: column;
+      padding-top: 420px;
     }
-    @media (max-width: 600px) {
-      padding-top: 500px;
+    @media screen and(max-width: 600px) {
+      padding-top: 570px;
     }
     .section-one {
       display: grid;
       grid-template-columns: 770px;
-      grid-gap: 50px;
       justify-content: center;
+      @media (max-width: 1050px) {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 100px;
+        hr {
+          visibility: hidden;
+        }
+        .itemdetail-cast-members {
+          flex-flow: wrap;
+        }
+        .itemdetail-reviews-items {
+          display: flex;
+          flex-flow: wrap;
+        }
+      }
+      @media (max-width: 600px) {
+        margin: 0 30px 0 30px;
+      }
       .itemdetail-cast-members {
         display: flex;
         .cast-card {
