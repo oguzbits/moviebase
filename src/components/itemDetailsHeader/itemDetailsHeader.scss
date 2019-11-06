@@ -45,6 +45,9 @@
           .itemdetail-header-text {
             padding-top: 10vh;
             margin-right: 50px;
+            @media only screen and (max-width: 600px) {
+              padding: 10vh 30px 0 30px;
+            }
           }
         }
         .itemdetail-header-text {

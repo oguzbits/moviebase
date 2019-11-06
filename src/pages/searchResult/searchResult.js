@@ -51,7 +51,7 @@ const SearchResult = props => {
         <div className="searchresult-body">
           <hr />
           <div className="card-wrapper">
-            {props.searchDataResults.results !== 0 ? (
+            {props.searchDataResults.results != 0 ? (
               props.searchDataResults.results.map(
                 item =>
                   imageSource(item) &&
