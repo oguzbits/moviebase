@@ -6,7 +6,6 @@ import dayjs from "dayjs";
 import searchData from "../../actions/searchData";
 
 import NavBar from "../../components/navBar/navBar";
-import Footer from "../../components/footer/footer";
 
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "./searchResult.scss";
@@ -23,9 +22,6 @@ const SearchResult = props => {
 
   useEffect(() => {
     getSearchData(params);
-    // return () => {
-    //   getSearchData(params);
-    // };
   }, [apiKey, params]);
 
   const pathTrailColor = rating => {
@@ -43,8 +39,8 @@ const SearchResult = props => {
   };
   return (
     <div>
+      <NavBar />
       <div className="searchresult-main">
-        <NavBar />
         <header className="searchresult-header">
           <h1>Searchresults for "{params}"</h1>
         </header>
@@ -135,7 +131,6 @@ const SearchResult = props => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
