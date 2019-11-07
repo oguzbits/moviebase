@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import moment from "moment";
+import dayjs from "dayjs";
 
 import searchData from "../../actions/searchData";
 
@@ -118,7 +118,7 @@ const SearchResult = props => {
                             }>
                             <div className="card-footer">
                               <small className="text-muted">
-                                {moment(
+                                {dayjs(
                                   item.release_date || item.first_air_date
                                 ).format("MMMM D, YYYY")}
                               </small>

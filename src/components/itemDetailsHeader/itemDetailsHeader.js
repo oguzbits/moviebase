@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 import ModalVideo from "react-modal-video";
@@ -123,7 +123,7 @@ const ItemDetailsHeader = props => {
               <div className="itemdetail-header-text">
                 <div className="itemdetail-title">
                   <h2>{props.details.name || props.details.title}</h2>
-                  <h4>({moment(props.details.release_date).format("YYYY")})</h4>
+                  <h4>({dayjs(props.details.release_date).format("YYYY")})</h4>
                 </div>
                 <div className="itemdetail-trailer-link">
                   <div className="rating-element">
@@ -331,7 +331,7 @@ const ItemDetailsHeader = props => {
                 <div className="itemdetail-release-date">
                   <h6>Release Date</h6>
                   <p>
-                    {moment(
+                    {dayjs(
                       props.details.release_date || props.details.first_air_date
                     ).format("MMMM D, YYYY")}
                   </p>

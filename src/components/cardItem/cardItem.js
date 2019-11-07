@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
@@ -59,7 +59,7 @@ const CardItem = props => {
             }>
             <div className="card-footer">
               <small className="text-muted">
-                {moment(
+                {dayjs(
                   props.item.release_date || props.item.first_air_date
                 ).format("MMMM D, YYYY")}
               </small>
