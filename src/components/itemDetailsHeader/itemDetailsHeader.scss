@@ -37,20 +37,23 @@
           padding-top: 10vh;
           display: flex;
           flex-flow: wrap;
+          justify-content: left;
+          // justify-content: center;
           .itemdetail-header-poster {
             width: 150px;
             padding-bottom: 10vh;
+            margin-left: 30px;
           }
           .itemdetail-header-text {
-            margin: 0 50px 0 50px;
+            padding-right: 150px;
             @media only screen and (max-width: 600px) {
-              padding: 0 30px 0 30px;
+              padding-right: 450px;
             }
           }
         }
         .itemdetail-header-text {
           max-width: 770px;
-          margin-left: 50px;
+          margin-left: 30px;
         }
         display: grid;
         grid-template-columns: 300px 700px;
