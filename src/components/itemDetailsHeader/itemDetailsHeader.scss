@@ -21,13 +21,13 @@
       height: 100vh;
     }
     @media only screen and (max-width: 1050px) {
-      margin-bottom: 500px;
+      margin-bottom: 520px;
     }
     @media only screen and (max-width: 768px) {
-      margin-bottom: 600px;
+      margin-bottom: 620px;
     }
     @media only screen and (max-width: 500px) {
-      margin-bottom: 650px;
+      margin-bottom: 700px;
     }
     .itemdetail-header-info {
       .itemdetail-header-grid {
@@ -46,9 +46,9 @@
           }
           .itemdetail-header-text {
             padding-right: 150px;
-            @media only screen and (max-width: 600px) {
-              padding-right: 450px;
-            }
+            // @media only screen and (max-width: 600px) {
+            //   padding-right: 450px;
+            // }
           }
         }
         .itemdetail-header-text {
