@@ -42,7 +42,7 @@ const SearchResult = props => {
       <NavBar />
       <div className="searchresult-main">
         <header className="searchresult-header">
-          <h1>Searchresults for "{params}"</h1>
+          <h1>Search results for "{params}"</h1>
         </header>
         <div className="searchresult-body">
           <hr />
