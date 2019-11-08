@@ -4,8 +4,6 @@ import Slider from "react-slick";
 import CardItem from "../cardItem/cardItem";
 
 import "react-circular-progressbar/dist/styles.css";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "./carousel.scss";
 
 const Carousel = props => {

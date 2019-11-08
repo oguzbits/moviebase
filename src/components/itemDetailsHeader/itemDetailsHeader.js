@@ -123,7 +123,13 @@ const ItemDetailsHeader = props => {
               <div className="itemdetail-header-text">
                 <div className="itemdetail-title">
                   <h2>{props.details.name || props.details.title}</h2>
-                  <h4>({dayjs(props.details.release_date).format("YYYY")})</h4>
+                  <h4>
+                    (
+                    {dayjs(
+                      props.details.release_date || props.details.first_air_date
+                    ).format("YYYY")}
+                    )
+                  </h4>
                 </div>
                 <div className="itemdetail-trailer-link">
                   <div className="rating-element">
