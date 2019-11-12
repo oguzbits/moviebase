@@ -63,73 +63,69 @@ const LandingPage = props => {
   let movie;
   if (props.itemType === "MOVIE") {
     movie = (
-      <Fade>
-        <div>
-          <Carousel
-            title="Upcoming"
-            genres={props.movieGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.moviesUpcoming.results}
-            type={props.itemType}
-          />
-          <Carousel
-            title="Popular"
-            genres={props.movieGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.moviesPopular.results}
-            type={props.itemType}
-          />
-          <Carousel
-            title="Now Playing"
-            genres={props.movieGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.moviesNowPlaying.results}
-            type={props.itemType}
-          />
-          <Carousel
-            title="Top Rated"
-            genres={props.movieGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.moviesTopRated.results}
-            type={props.itemType}
-          />
-        </div>
-      </Fade>
+      <div>
+        <Carousel
+          title="Upcoming"
+          genres={props.movieGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.moviesUpcoming.results}
+          type={props.itemType}
+        />
+        <Carousel
+          title="Popular"
+          genres={props.movieGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.moviesPopular.results}
+          type={props.itemType}
+        />
+        <Carousel
+          title="Now Playing"
+          genres={props.movieGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.moviesNowPlaying.results}
+          type={props.itemType}
+        />
+        <Carousel
+          title="Top Rated"
+          genres={props.movieGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.moviesTopRated.results}
+          type={props.itemType}
+        />
+      </div>
     );
   } else if (props.itemType === "TV") {
     movie = (
-      <Fade>
-        <div>
-          <Carousel
-            title="Airing Today"
-            genres={props.TVGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.TVAiringToday.results}
-            type={props.itemType}
-          />
-          <Carousel
-            title="Popular"
-            genres={props.TVGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.TVPopular.results}
-            type={props.itemType}
-          />
-          <Carousel
-            title="On The Air"
-            genres={props.TVGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.TVOnTheAir.results}
-            type={props.itemType}
-          />
-          <Carousel
-            title="Top Rated"
-            genres={props.TVGenres.genres}
-            MDBConfig={props.MDBConfig}
-            items={props.TVTopRated.results}
-            type={props.itemType}
-          />
-        </div>
-      </Fade>
+      <div>
+        <Carousel
+          title="Airing Today"
+          genres={props.TVGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.TVAiringToday.results}
+          type={props.itemType}
+        />
+        <Carousel
+          title="Popular"
+          genres={props.TVGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.TVPopular.results}
+          type={props.itemType}
+        />
+        <Carousel
+          title="On The Air"
+          genres={props.TVGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.TVOnTheAir.results}
+          type={props.itemType}
+        />
+        <Carousel
+          title="Top Rated"
+          genres={props.TVGenres.genres}
+          MDBConfig={props.MDBConfig}
+          items={props.TVTopRated.results}
+          type={props.itemType}
+        />
+      </div>
     );
   }
 
@@ -148,7 +144,9 @@ const LandingPage = props => {
             : props.moviesNowPlaying.results
         }
       />
-      <div className="landing-page-main">{movie}</div>
+      <div className="landing-page-main">
+        <Fade delay="500">{movie}</Fade>
+      </div>
       <Footer />
     </div>
   );
