@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 
+import Fade from "react-reveal/Fade";
+
 import CardItem from "../../components/cardItem/cardItem";
 
 import NavBar from "../../components/navBar/navBar";
@@ -108,127 +110,131 @@ const Discover = props => {
     <main>
       <NavBar />
       <div className="discover-main">
-        <header>
-          <h1>DISCOVER</h1>
-          <hr />
-          <div className="discover-subheader">
-            <h3
-              id="header-movies"
-              style={{
-                textDecoration: itemType === "TV" ? "" : "underline"
-              }}
-              onClick={() => {
-                props.setItemType("MOVIE");
-                setPage(1);
-              }}>
-              Movies
-            </h3>
-            <h3
-              id="header-tvshows"
-              style={{
-                textDecoration: itemType === "TV" ? "underline" : ""
-              }}
-              onClick={() => {
-                props.setItemType("TV");
-                setPage(1);
-              }}>
-              TV Shows
-            </h3>
-          </div>
-          <form className="discover-header-form">
-            <div className="discover-header-form-container">
-              <div className="select-year">
-                <h6>Year</h6>
-                <Dropdown
-                  defaultValue={currentYear}
-                  fluid
-                  selection
-                  onChange={(...args) => {
-                    setYear(args[1].value);
-                  }}
-                  options={handleYearList(yearList)}
-                />
-              </div>
-              <div className="select-sortby">
-                <h6>Sort By</h6>
-                <Dropdown
-                  defaultValue={options[0].value}
-                  fluid
-                  selection
-                  onChange={(...args) => {
-                    setSortBy(args[1].value);
-                  }}
-                  options={options}
-                />
-              </div>
-              <div className="select-genres">
-                <h6>Genres</h6>
-                <Dropdown
-                  placeholder="Filter by genres..."
-                  fluid
-                  multiple
-                  search
-                  selection
-                  onChange={(...args) => {
-                    setGenres({ value: args[1].value });
-                  }}
-                  clearable
-                  options={handleGenreList()}
-                />
-              </div>
-              <div className="select-keywords">
-                <h6>Keywords</h6>
-                <Dropdown
-                  placeholder="Filter by keywords..."
-                  fluid
-                  multiple
-                  search
-                  selection
-                  onSearchChange={(...args) => {
-                    handleKeywordList(args[1].searchQuery);
-                  }}
-                  onChange={(...args) => {
-                    setKeywords({ value: args[1].value });
-                  }}
-                  clearable
-                  options={keywordInput}
-                />
-              </div>
+        <Fade>
+          <header>
+            <h1>DISCOVER</h1>
+            <hr />
+            <div className="discover-subheader">
+              <h3
+                id="header-movies"
+                style={{
+                  textDecoration: itemType === "TV" ? "" : "underline"
+                }}
+                onClick={() => {
+                  props.setItemType("MOVIE");
+                  setPage(1);
+                }}
+              >
+                Movies
+              </h3>
+              <h3
+                id="header-tvshows"
+                style={{
+                  textDecoration: itemType === "TV" ? "underline" : ""
+                }}
+                onClick={() => {
+                  props.setItemType("TV");
+                  setPage(1);
+                }}
+              >
+                TV Shows
+              </h3>
             </div>
-          </form>
-        </header>
-        <main className="discover-main">
-          <div className="card-wrapper">
-            {props.discover.results.length > 0 ? (
-              props.discover.results.map(
-                (item, i) =>
-                  imageSource(item) &&
-                  item.overview && (
-                    <div key={i}>
-                      <CardItem
-                        item={item}
-                        type={itemType}
-                        pathcolor={pathTrailColor(item.vote_average)}
-                        image={imageSource(item)}
-                      />
-                    </div>
-                  )
-              )
-            ) : (
-              <h2 style={{ color: "white" }} className="discover-warning">
-                No results found
-              </h2>
-            )}
+            <form className="discover-header-form">
+              <div className="discover-header-form-container">
+                <div className="select-year">
+                  <h6>Year</h6>
+                  <Dropdown
+                    defaultValue={currentYear}
+                    fluid
+                    selection
+                    onChange={(...args) => {
+                      setYear(args[1].value);
+                    }}
+                    options={handleYearList(yearList)}
+                  />
+                </div>
+                <div className="select-sortby">
+                  <h6>Sort By</h6>
+                  <Dropdown
+                    defaultValue={options[0].value}
+                    fluid
+                    selection
+                    onChange={(...args) => {
+                      setSortBy(args[1].value);
+                    }}
+                    options={options}
+                  />
+                </div>
+                <div className="select-genres">
+                  <h6>Genres</h6>
+                  <Dropdown
+                    placeholder="Filter by genres..."
+                    fluid
+                    multiple
+                    search
+                    selection
+                    onChange={(...args) => {
+                      setGenres({ value: args[1].value });
+                    }}
+                    clearable
+                    options={handleGenreList()}
+                  />
+                </div>
+                <div className="select-keywords">
+                  <h6>Keywords</h6>
+                  <Dropdown
+                    placeholder="Filter by keywords..."
+                    fluid
+                    multiple
+                    search
+                    selection
+                    onSearchChange={(...args) => {
+                      handleKeywordList(args[1].searchQuery);
+                    }}
+                    onChange={(...args) => {
+                      setKeywords({ value: args[1].value });
+                    }}
+                    clearable
+                    options={keywordInput}
+                  />
+                </div>
+              </div>
+            </form>
+          </header>
+          <main className="discover-main">
+            <div className="card-wrapper">
+              {props.discover.results.length > 0 ? (
+                props.discover.results.map(
+                  (item, i) =>
+                    imageSource(item) &&
+                    item.overview && (
+                      <div key={i}>
+                        <CardItem
+                          item={item}
+                          type={itemType}
+                          pathcolor={pathTrailColor(item.vote_average)}
+                          image={imageSource(item)}
+                        />
+                      </div>
+                    )
+                )
+              ) : (
+                <h2 style={{ color: "white" }} className="discover-warning">
+                  No results found
+                </h2>
+              )}
+            </div>
+          </main>
+          <div className="discover-pagination">
+            <Pagination
+              itemsCount={200}
+              pageSize={20}
+              currentPage={page}
+              onPageChange={page => setPage(page)}
+            />
           </div>
-        </main>
-        <div className="discover-pagination">
-          <Pagination
-            itemsCount={200}
-            pageSize={20}
-            currentPage={page}
-            onPageChange={page => setPage(page)}
-          />
-        </div>
+        </Fade>
       </div>
       <Footer />
     </main>
@@ -252,7 +258,4 @@ const mapDispatchToProps = dispatch => ({
   getDiscover: url => dispatch(getDiscover(url))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Discover);
+export default connect(mapStateToProps, mapDispatchToProps)(Discover);

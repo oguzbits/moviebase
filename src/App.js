@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-// import ScrollToTop from "react-router-scroll-top";
 
 import { postMDBConfig } from "./actions/PostMDBConfigAction";
 import postMovieGenres from "./actions/movieActions/postMovieGenres";
@@ -56,7 +55,4 @@ const mapDispatcherToProps = dispatch => ({
   postTVGenres: url => dispatch(postTVGenres(url))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatcherToProps
-)(App);
+export default connect(mapStateToProps, mapDispatcherToProps)(App);

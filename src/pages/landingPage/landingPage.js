@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
+import Fade from "react-reveal/Fade";
+
 import setItemType from "../../actions/setItemType";
 
 import postMoviesNowPlaying from "../../actions/movieActions/postMoviesNowPlaying";
@@ -61,69 +63,73 @@ const LandingPage = props => {
   let movie;
   if (props.itemType === "MOVIE") {
     movie = (
-      <div>
-        <Carousel
-          title="Upcoming"
-          genres={props.movieGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.moviesUpcoming.results}
-          type={props.itemType}
-        />
-        <Carousel
-          title="Popular"
-          genres={props.movieGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.moviesPopular.results}
-          type={props.itemType}
-        />
-        <Carousel
-          title="Now Playing"
-          genres={props.movieGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.moviesNowPlaying.results}
-          type={props.itemType}
-        />
-        <Carousel
-          title="Top Rated"
-          genres={props.movieGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.moviesTopRated.results}
-          type={props.itemType}
-        />
-      </div>
+      <Fade>
+        <div>
+          <Carousel
+            title="Upcoming"
+            genres={props.movieGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.moviesUpcoming.results}
+            type={props.itemType}
+          />
+          <Carousel
+            title="Popular"
+            genres={props.movieGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.moviesPopular.results}
+            type={props.itemType}
+          />
+          <Carousel
+            title="Now Playing"
+            genres={props.movieGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.moviesNowPlaying.results}
+            type={props.itemType}
+          />
+          <Carousel
+            title="Top Rated"
+            genres={props.movieGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.moviesTopRated.results}
+            type={props.itemType}
+          />
+        </div>
+      </Fade>
     );
   } else if (props.itemType === "TV") {
     movie = (
-      <div>
-        <Carousel
-          title="Airing Today"
-          genres={props.TVGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.TVAiringToday.results}
-          type={props.itemType}
-        />
-        <Carousel
-          title="Popular"
-          genres={props.TVGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.TVPopular.results}
-          type={props.itemType}
-        />
-        <Carousel
-          title="On The Air"
-          genres={props.TVGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.TVOnTheAir.results}
-          type={props.itemType}
-        />
-        <Carousel
-          title="Top Rated"
-          genres={props.TVGenres.genres}
-          MDBConfig={props.MDBConfig}
-          items={props.TVTopRated.results}
-          type={props.itemType}
-        />
-      </div>
+      <Fade>
+        <div>
+          <Carousel
+            title="Airing Today"
+            genres={props.TVGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.TVAiringToday.results}
+            type={props.itemType}
+          />
+          <Carousel
+            title="Popular"
+            genres={props.TVGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.TVPopular.results}
+            type={props.itemType}
+          />
+          <Carousel
+            title="On The Air"
+            genres={props.TVGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.TVOnTheAir.results}
+            type={props.itemType}
+          />
+          <Carousel
+            title="Top Rated"
+            genres={props.TVGenres.genres}
+            MDBConfig={props.MDBConfig}
+            items={props.TVTopRated.results}
+            type={props.itemType}
+          />
+        </div>
+      </Fade>
     );
   }
 
@@ -181,7 +187,4 @@ const mapDispatchToProps = dispatch => ({
   postTVOnTheAir: url => dispatch(postTVOnTheAir(url)),
   postTVTopRated: url => dispatch(postTVTopRated(url))
 });
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(LandingPage);
+export default connect(mapStateToProps, mapDispatchToProps)(LandingPage);

@@ -155,7 +155,4 @@ const mapDispatchToProps = dispatch => ({
   getTVExternalIDs: url => dispatch(getTVExternalIDs(url))
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ItemDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemDetails);
