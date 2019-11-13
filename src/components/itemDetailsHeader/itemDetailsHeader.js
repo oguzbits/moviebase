@@ -115,7 +115,7 @@ const ItemDetailsHeader = props => {
 
   return (
     <div className="itemdetail-mainheader">
-      <Fade>
+      <Fade delay="300">
         <header className="itemdetail-header" style={headerImg}>
           <div className="itemdetail-header-backimage">
             <div className="itemdetail-header-info">
@@ -280,18 +280,29 @@ const ItemDetailsHeader = props => {
                       <h4 className="carousel-title">
                         Recommendations {props.recommendations.results.length}
                       </h4>
-                      <Slider {...settings} style={{ textAlign: "center" }}>
-                        {props.recommendations.results.map((item, i) => (
-                          <div key={i}>
-                            <CardItem
-                              item={item}
-                              type={props.type}
-                              pathcolor={pathTrailColor(item.vote_average)}
-                              image={imageSource(item)}
-                            />
-                          </div>
-                        ))}
-                      </Slider>
+                      {props.recommendations.results.length > 1 ? (
+                        <Slider {...settings} style={{ textAlign: "center" }}>
+                          {props.recommendations.results.map((item, i) => (
+                            <div key={i}>
+                              <CardItem
+                                item={item}
+                                type={props.type}
+                                pathcolor={pathTrailColor(item.vote_average)}
+                                image={imageSource(item)}
+                              />
+                            </div>
+                          ))}
+                        </Slider>
+                      ) : (
+                        <CardItem
+                          item={props.recommendations.results[0]}
+                          type={props.type}
+                          pathcolor={pathTrailColor(
+                            props.recommendations.results[0].vote_average
+                          )}
+                          image={imageSource(props.recommendations.results[0])}
+                        />
+                      )}
                     </div>
                   )}
                 </div>
