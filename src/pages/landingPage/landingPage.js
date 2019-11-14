@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-
-import Fade from "react-reveal/Fade";
+import Loader from "react-loader";
 
 import setItemType from "../../actions/setItemType";
 
@@ -23,6 +22,12 @@ import Carousel from "../../components/carousel/carousel";
 import "./landingPage.scss";
 
 const LandingPage = props => {
+  const moviesLoaded =
+    props.moviesNowPlaying.loaded &&
+    props.moviesPopular.loaded &&
+    props.moviesUpcoming.loaded &&
+    props.moviesTopRated.loaded;
+
   const handleMovieFetch = () => {
     props.postMoviesUpcoming(
       `https://api.themoviedb.org/3/movie/upcoming?api_key=${props.apiKey}&language=en-US&page=1`
@@ -53,12 +58,9 @@ const LandingPage = props => {
     );
   };
   useEffect(() => {
-    if (props.itemType === "MOVIE") {
-      handleMovieFetch();
-    } else if (props.itemType === "TV") {
-      handleTVFetch();
-    }
-  }, [props.itemType]);
+    handleMovieFetch();
+    handleTVFetch();
+  }, [props.apiKey]);
 
   let movie;
   if (props.itemType === "MOVIE") {
@@ -131,27 +133,26 @@ const LandingPage = props => {
 
   return (
     <div className="landing-page">
-      <NavBar />
-      <LandingHeader
-        itemType={props.itemType}
-        MDBConfig={props.MDBConfig}
-        movieGenres={
-          props.itemType === "TV" ? props.TVGenres : props.movieGenres
-        }
-        items={
-          props.itemType === "TV"
-            ? props.TVAiringToday.results
-            : props.moviesNowPlaying.results
-        }
-      />
-      <div className="landing-page-main">
-        <Fade delay="500">{movie}</Fade>
-      </div>
-      <Footer />
+      <Loader loaded={moviesLoaded} style={{ background: "red" }}>
+        <NavBar />
+        <LandingHeader
+          itemType={props.itemType}
+          MDBConfig={props.MDBConfig}
+          movieGenres={
+            props.itemType === "TV" ? props.TVGenres : props.movieGenres
+          }
+          items={
+            props.itemType === "TV"
+              ? props.TVAiringToday.results
+              : props.moviesNowPlaying.results
+          }
+        />
+        <div className="landing-page-main">{movie}</div>
+        <Footer />
+      </Loader>
     </div>
   );
 };
-
 const mapStateToProps = state => ({
   apiKey: state.PostMDBConfig.apiKey,
   MDBConfig: state.PostMDBConfig,

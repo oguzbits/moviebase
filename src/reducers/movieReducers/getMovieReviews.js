@@ -1,15 +1,17 @@
-import { GET_MOVIE_REVIEWS } from '../../actions/types';
+import { GET_MOVIE_REVIEWS } from "../../actions/types";
 
 const initialState = {
+  loaded: false,
   results: []
 };
 
 const getMovieReviews = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case GET_MOVIE_REVIEWS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loaded: true
       };
     default:
       return state;

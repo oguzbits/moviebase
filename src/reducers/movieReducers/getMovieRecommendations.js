@@ -1,6 +1,7 @@
 import { GET_MOVIE_RECOMMENDATIONS } from "../../actions/types";
 
 const initialState = {
+  movieRecommendationsloaded: false,
   results: []
 };
 
@@ -9,7 +10,8 @@ const getMovieRecommendations = (state = initialState, action) => {
     case GET_MOVIE_RECOMMENDATIONS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        movieRecommendationsloaded: true
       };
     default:
       return state;

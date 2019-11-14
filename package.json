@@ -24,6 +24,7 @@
     "react-dropdown-select": "^3.6.5",
     "react-glider-carousel": "^0.1.2",
     "react-lazyload": "^2.6.2",
+    "react-loader": "^2.4.5",
     "react-modal-video": "^1.2.3",
     "react-move": "^6.0.0",
     "react-paginate": "^6.3.0",

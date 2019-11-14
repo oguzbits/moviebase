@@ -115,7 +115,7 @@ const ItemDetailsHeader = props => {
 
   return (
     <div className="itemdetail-mainheader">
-      <Fade delay="300">
+      <Fade delay={300}>
         <header className="itemdetail-header" style={headerImg}>
           <div className="itemdetail-header-backimage">
             <div className="itemdetail-header-info">
@@ -206,7 +206,6 @@ const ItemDetailsHeader = props => {
           </div>
         </header>
       </Fade>
-
       <div>
         <main>
           <div className="itemdetail-main-grid">

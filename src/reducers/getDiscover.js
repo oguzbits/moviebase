@@ -1,6 +1,7 @@
 import { GET_DISCOVER } from "../actions/types";
 
 const initialState = {
+  loaded: false,
   page: "",
   total_results: "",
   total_pages: "",
@@ -12,7 +13,8 @@ const getDiscover = (state = initialState, action) => {
     case GET_DISCOVER:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loaded: true
       };
     default:
       return state;

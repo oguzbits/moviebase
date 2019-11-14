@@ -1,6 +1,7 @@
 import { GET_TV_RECOMMENDATIONS } from "../../actions/types";
 
 const initialState = {
+  loaded: false,
   results: []
 };
 
@@ -9,7 +10,8 @@ const getTVRecommendations = (state = initialState, action) => {
     case GET_TV_RECOMMENDATIONS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loaded: true
       };
     default:
       return state;

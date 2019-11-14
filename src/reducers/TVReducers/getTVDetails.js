@@ -1,6 +1,7 @@
 import { GET_TV_DETAILS } from "../../actions/types";
 
 const initialState = {
+  loaded: false,
   episode_run_time: []
 };
 
@@ -9,7 +10,8 @@ const getTVDetails = (state = initialState, action) => {
     case GET_TV_DETAILS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loaded: true
       };
     default:
       return state;

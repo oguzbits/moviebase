@@ -1,6 +1,7 @@
 import { GET_TV_CREDITS } from "../../actions/types";
 
 const initialState = {
+  loaded: false,
   cast: [],
   crew: []
 };
@@ -10,7 +11,8 @@ const getTVCredits = (state = initialState, action) => {
     case GET_TV_CREDITS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loaded: true
       };
     default:
       return state;

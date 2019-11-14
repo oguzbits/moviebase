@@ -1,6 +1,7 @@
 import { GET_MOVIE_CREDITS } from "../../actions/types";
 
 const initialState = {
+  loaded: false,
   cast: [],
   crew: []
 };
@@ -10,7 +11,8 @@ const getMovieCredits = (state = initialState, action) => {
     case GET_MOVIE_CREDITS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loaded: true
       };
     default:
       return state;

@@ -1,6 +1,7 @@
 import { GET_MOVIE_DETAILS } from "../../actions/types";
 
 const initialState = {
+  loaded: false,
   runtime: []
 };
 
@@ -9,7 +10,8 @@ const getMovieDetails = (state = initialState, action) => {
     case GET_MOVIE_DETAILS:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        loaded: true
       };
     default:
       return state;
