@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import dayjs from "dayjs";
+import DetectBrowser from "react-detect-browser";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import ChangingProgressProvider from "./ChangingProgressProvider";
 import ModalVideo from "react-modal-video";
 import Slider from "react-slick";
 import { getCountryName } from "./getCountryName";
 import CardItem from "../cardItem/cardItem";
-// import ReactTooltip from "react-tooltip";
 
 import Fade from "react-reveal/Fade";
 
@@ -94,7 +94,19 @@ const ItemDetailsHeader = props => {
           background
           backgroundPadding={6}
           value={percentage}
-          text={<tspan dy={2}>{props.details.vote_average * 10}%</tspan>}
+          text={
+            <DetectBrowser>
+              {({ browser }) =>
+                browser ? (
+                  <tspan dy={browser.name === ("edge" || "safari") ? 8 : 2}>
+                    {props.details.vote_average * 10}%
+                  </tspan>
+                ) : (
+                  <tspan dy={2}>{props.details.vote_average * 10}%</tspan>
+                )
+              }
+            </DetectBrowser>
+          }
         />
       )}
     </ChangingProgressProvider>

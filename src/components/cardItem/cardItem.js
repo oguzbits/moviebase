@@ -1,4 +1,5 @@
 import React from "react";
+import DetectBrowser from "react-detect-browser";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
@@ -6,14 +7,16 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import "./cardItem.scss";
-
 const CardItem = props => {
+  const needDominantBaselineFix = true;
+  console.log(needDominantBaselineFix);
   return (
     <Link
       to={`/details/${props.type.toLowerCase()}/${props.item.id}`}
       key={props.item.id}
       id="card-container"
-      className="card">
+      className="card"
+    >
       <div id="card-grid">
         <div className="card">
           <img src={props.image} className="card-img" alt="..." />
@@ -35,14 +38,31 @@ const CardItem = props => {
                   background
                   backgroundPadding={6}
                   value={props.item.vote_average * 10}
-                  text={<tspan dy={2.5}>{props.item.vote_average * 10}</tspan>}
+                  text={
+                    <DetectBrowser>
+                      {({ browser }) =>
+                        browser ? (
+                          <tspan
+                            dy={
+                              browser.name === ("edge" || "safari") ? 15 : 2.5
+                            }
+                          >
+                            {props.item.vote_average * 10}
+                          </tspan>
+                        ) : (
+                          <tspan dy={2.5}>{props.item.vote_average * 10}</tspan>
+                        )
+                      }
+                    </DetectBrowser>
+                  }
                 />
               </div>
               <div>{props.item.title || props.item.name}</div>
             </div>
             <p
               className="card-text"
-              style={({ minHeight: "85px" }, { maxHeight: "85px" })}>
+              style={({ minHeight: "85px" }, { maxHeight: "85px" })}
+            >
               {props.item.overview.length > 200
                 ? `${props.item.overview.substring(0, 200)}...`
                 : props.item.overview}
@@ -54,7 +74,8 @@ const CardItem = props => {
               props.item.vote_average >= 7
                 ? "card-footer text-muted border-success"
                 : "card-footer text-muted border-warning"
-            }>
+            }
+          >
             <div className="card-footer">
               <small className="text-muted">
                 {dayjs(

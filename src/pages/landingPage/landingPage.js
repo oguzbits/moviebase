@@ -60,7 +60,7 @@ const LandingPage = props => {
   useEffect(() => {
     handleMovieFetch();
     handleTVFetch();
-  }, [props.apiKey]);
+  }, []);
 
   let movie;
   if (props.itemType === "MOVIE") {

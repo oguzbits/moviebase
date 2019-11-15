@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import { postMDBConfig } from "./actions/PostMDBConfigAction";
 import postMovieGenres from "./actions/movieActions/postMovieGenres";
@@ -32,14 +32,11 @@ const App = props => {
     <BrowserRouter>
       <ScrollToTop />
       <div className="App">
-        <Switch>
-          <Route path="/" exact component={LandingPage} />
-          <Route path="/discover" component={Discover} />
-          <Route path="/details/:type/:id" component={ItemDetails} />
-          <Route path="/search-results/:id" component={SearchResult} />
-        </Switch>
+        <Route path="/" exact component={LandingPage} />
+        <Route path="/discover" component={Discover} />
+        <Route path="/details/:type/:id" component={ItemDetails} />
+        <Route path="/search-results/:id" component={SearchResult} />
       </div>
-      <ScrollToTop />
     </BrowserRouter>
   );
 };
