@@ -8,8 +8,6 @@ import "react-circular-progressbar/dist/styles.css";
 
 import "./cardItem.scss";
 const CardItem = props => {
-  const needDominantBaselineFix = true;
-  console.log(needDominantBaselineFix);
   return (
     <Link
       to={`/details/${props.type.toLowerCase()}/${props.item.id}`}
@@ -44,7 +42,9 @@ const CardItem = props => {
                         browser ? (
                           <tspan
                             dy={
-                              browser.name === ("edge" || "safari") ? 15 : 2.5
+                              browser.name === ("edge" || "safari" || "ios")
+                                ? 15
+                                : 2.5
                             }
                           >
                             {props.item.vote_average * 10}

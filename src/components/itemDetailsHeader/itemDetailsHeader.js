@@ -98,7 +98,9 @@ const ItemDetailsHeader = props => {
             <DetectBrowser>
               {({ browser }) =>
                 browser ? (
-                  <tspan dy={browser.name === ("edge" || "safari") ? 8 : 2}>
+                  <tspan
+                    dy={browser.name === ("edge" || "safari" || "ios") ? 8 : 2}
+                  >
                     {props.details.vote_average * 10}%
                   </tspan>
                 ) : (
