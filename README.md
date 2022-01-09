@@ -2,7 +2,7 @@
 
 React application to browse your favorite Movies and TV shows.
 
-[Moviebase](https://moviebase.space/)
+[Moviebase](https://moviebase.oguzbits.com/)
 
 ## Getting Started
 
