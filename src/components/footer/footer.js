@@ -16,7 +16,7 @@ const Footer = () => {
         </div>
         <p>
           Copyright <i className="far fa-copyright fa-sm" />
-          2019
+          { new Date().getFullYear() }
         </p>
         <p>Made by Oguz Öztürk</p>
         <div className="social-icons">
