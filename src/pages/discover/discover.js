@@ -34,6 +34,7 @@ const Discover = props => {
 
   useEffect(() => {
     handleGetDiscover();
+  // eslint-disable-next-line
   }, [apiKey, itemType, sortBy, genres, keywords, year, page]);
 
   const handleGetDiscover = () => {

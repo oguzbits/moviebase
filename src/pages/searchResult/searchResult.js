@@ -16,14 +16,11 @@ const SearchResult = props => {
   const apiKey = props.apiKey;
   const params = props.match.params.id;
 
-  const getSearchData = searchInput => {
-    props.searchData(
-      `https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1&include_adult=false`
-    );
-  };
+  const getSearchData = searchInput => props.searchData(`https://api.themoviedb.org/3/search/multi?api_key=${apiKey}&language=en-US&query=${searchInput}&page=1&include_adult=false`);
 
   useEffect(() => {
     getSearchData(params);
+  // eslint-disable-next-line
   }, [apiKey, params]);
 
   const pathTrailColor = rating => {
@@ -50,7 +47,7 @@ const SearchResult = props => {
           <div className="searchresult-body">
             <hr />
             <div className="card-wrapper">
-              {props.searchDataResults.results != 0 ? (
+              {props.searchDataResults.results !== 0 ? (
                 props.searchDataResults.results.map(
                   item =>
                     imageSource(item) &&

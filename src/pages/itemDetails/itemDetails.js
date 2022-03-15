@@ -24,6 +24,7 @@ import "./itemDetails.scss";
 const ItemDetails = props => {
   useEffect(() => {
     fetchData(props.match.params.id);
+  // eslint-disable-next-line
   }, [props.match.params.id]);
 
   const fetchData = (id, type = props.match.params.type) => {

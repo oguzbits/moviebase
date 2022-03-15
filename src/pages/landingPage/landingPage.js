@@ -60,6 +60,7 @@ const LandingPage = props => {
   useEffect(() => {
     handleMovieFetch();
     handleTVFetch();
+  // eslint-disable-next-line
   }, []);
 
   let movie;
