@@ -9,12 +9,7 @@ import "react-circular-progressbar/dist/styles.css";
 import "./cardItem.scss";
 const CardItem = props => {
   return (
-    <Link
-      to={`/details/${props.type.toLowerCase()}/${props.item.id}`}
-      key={props.item.id}
-      id="card-container"
-      className="card"
-    >
+    <Link to={`/details/${props.type.toLowerCase()}/${props.item.id}`} key={props.item.id} id="card-container" className="card">
       <div id="card-grid">
         <div className="card">
           <img src={props.image} className="card-img" alt="..." />
@@ -40,13 +35,7 @@ const CardItem = props => {
                     <DetectBrowser>
                       {({ browser }) =>
                         browser ? (
-                          <tspan
-                            dy={
-                              browser.name === ("edge" || "safari" || "ios")
-                                ? 15
-                                : 2.5
-                            }
-                          >
+                          <tspan dy={browser.name === ("edge" || "safari" || "ios") ? 15 : 2.5}>
                             {props.item.vote_average * 10}
                           </tspan>
                         ) : (
@@ -59,28 +48,14 @@ const CardItem = props => {
               </div>
               <div>{props.item.title || props.item.name}</div>
             </div>
-            <p
-              className="card-text"
-              style={({ minHeight: "85px" }, { maxHeight: "85px" })}
-            >
-              {props.item.overview.length > 200
-                ? `${props.item.overview.substring(0, 200)}...`
-                : props.item.overview}
+            <p className="card-text">
+              { props.item.overview }
             </p>
           </div>
-          <div
-            id="footer-container"
-            className={
-              props.item.vote_average >= 7
-                ? "card-footer text-muted border-success"
-                : "card-footer text-muted border-warning"
-            }
-          >
+          <div id="footer-container" className={ props.item.vote_average >= 7 ? "card-footer text-muted border-success" : "card-footer text-muted border-warning"}>
             <div className="card-footer">
               <small className="text-muted">
-                {dayjs(
-                  props.item.release_date || props.item.first_air_date
-                ).format("MMMM D, YYYY")}
+                { dayjs(props.item.release_date || props.item.first_air_date).format("MMMM D, YYYY") }
               </small>
             </div>
           </div>
