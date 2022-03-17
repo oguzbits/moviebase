@@ -7,12 +7,15 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 import "./cardItem.scss";
-const CardItem = props => {
+const CardItem = (props) => {
+  const { image, item, type } = props
+  const roundedVoteAverage = Math.round(item.vote_average * 10)
+
   return (
-    <Link to={`/details/${props.type.toLowerCase()}/${props.item.id}`} key={props.item.id} id="card-container" className="card">
+    <Link to={`/details/${type.toLowerCase()}/${item.id}`} key={item.id} id="card-container" className="card">
       <div id="card-grid">
         <div className="card">
-          <img src={props.image} className="card-img" alt="..." />
+          <img src={image} className="card-img" alt="..." />
         </div>
         <div className="card">
           <div className="card-body">
@@ -30,32 +33,32 @@ const CardItem = props => {
                   strokeWidth={10}
                   background
                   backgroundPadding={6}
-                  value={props.item.vote_average * 10}
+                  value={roundedVoteAverage}
                   text={
                     <DetectBrowser>
                       {({ browser }) =>
                         browser ? (
                           <tspan dy={browser.name === ("edge" || "safari" || "ios") ? 15 : 2.5}>
-                            {props.item.vote_average * 10}
+                            {roundedVoteAverage}
                           </tspan>
                         ) : (
-                          <tspan dy={2.5}>{props.item.vote_average * 10}</tspan>
+                          <tspan dy={2.5}>{roundedVoteAverage}</tspan>
                         )
                       }
                     </DetectBrowser>
                   }
                 />
               </div>
-              <div>{props.item.title || props.item.name}</div>
+              <div>{item.title || item.name}</div>
             </div>
             <p className="card-text">
-              { props.item.overview }
+              { item.overview }
             </p>
           </div>
-          <div id="footer-container" className={ props.item.vote_average >= 7 ? "card-footer text-muted border-success" : "card-footer text-muted border-warning"}>
+          <div id="footer-container" className={ item.vote_average >= 7 ? "card-footer text-muted border-success" : "card-footer text-muted border-warning"}>
             <div className="card-footer">
               <small className="text-muted">
-                { dayjs(props.item.release_date || props.item.first_air_date).format("MMMM D, YYYY") }
+                { dayjs(item.release_date || item.first_air_date).format("MMMM D, YYYY") }
               </small>
             </div>
           </div>
