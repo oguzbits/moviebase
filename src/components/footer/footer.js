@@ -20,70 +20,36 @@ const Footer = () => {
         </p>
         <p>Made by Oguz Öztürk</p>
         <div className="social-icons">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://oguzbits.com"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="https://oguzbits.com">
             <i className="fas fa-link" />
           </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://github.com/oguzbits"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/oguzbits">
             <i className="fab fa-github" />
           </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://stackoverflow.com/story/oguzoeztuerk"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="https://stackoverflow.com/story/oguzoeztuerk">
             <i className="fab fa-stack-overflow" />
           </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="mailto:oguz.oeztuerk@outlook.de"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="mailto:oguz.oeztuerk@outlook.de">
             <i className="fas fa-envelope" />
           </a>
         </div>
       </div>
       <div className="section-2">
         <header>
-          <img
-            src={tmdblogo}
-            href="https://www.themoviedb.org"
-            width="130"
-            height="130"
-            alt=""
-          />
+          <img src={tmdblogo} href="https://www.themoviedb.org" width="130" height="130" alt=""/>
         </header>
         <p>
           This product uses the TMDb API but is not endorsed or certified by
           TMDb.
         </p>
         <div className="social-icons">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.themoviedb.org"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="https://www.themoviedb.org">
             <i className="fas fa-link" />
           </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://twitter.com/themoviedb"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/themoviedb">
             <i className="fab fa-twitter" />
           </a>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.facebook.com/themoviedb"
-          >
+          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/themoviedb">
             <i className="fab fa-facebook" />
           </a>
         </div>

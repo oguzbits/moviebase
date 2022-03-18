@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 
 import "react-circular-progressbar/dist/styles.css";
-
 import "./cardItem.scss";
+
 const CardItem = (props) => {
   const { image, item, type } = props
   const roundedVoteAverage = Math.round(item.vote_average * 10)

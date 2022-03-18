@@ -51,12 +51,7 @@ const Carousel = props => {
   };
 
   const config = props.MDBConfig.images;
-  const imageSource = item => {
-    return config
-      ? config.secure_base_url + config.poster_sizes[0] + item.poster_path ||
-          item.backdrop_path
-      : "";
-  };
+  const imageSource = item => config ? config.secure_base_url + config.poster_sizes[0] + item.poster_path || item.backdrop_path : ""
 
   return (
     <div className="carousel-main">
