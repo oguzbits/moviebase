@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 
 import NavBar from "../../components/navBar/navBar";
-
 import ItemDetailsHeader from "../../components/itemDetailsHeader/itemDetailsHeader";
 
 import getMovieDetails from "../../actions/movieActions/getMovieDetails";

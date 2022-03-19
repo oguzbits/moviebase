@@ -43,39 +43,16 @@ const ItemDetailsHeader = props => {
   };
 
   const config = props.MDBConfig.images;
-  const backgroundImgLink = config
-    ? config.secure_base_url +
-      config.backdrop_sizes[2] +
-      props.details.backdrop_path
-    : "";
-  // const headerImg = {
-  //   background: `linear-gradient(0deg, rgba(0,0,0,1) 5%, rgba(0,0,0,0.45) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
-  // };
+  const backgroundImgLink = config ? config.secure_base_url + config.backdrop_sizes[2] + props.details.backdrop_path : "";
   const headerImg = {
     background: `linear-gradient(0deg, rgba(15,15,15,0.9) 5%, rgba(15,15,15,0.9) 92%) center center no-repeat, #fff url(${backgroundImgLink})center top no-repeat`
   };
 
-  const posterLink = config
-    ? config.secure_base_url +
-        config.poster_sizes[3] +
-        props.details.poster_path || props.details.backdrop_path
-    : "";
-  const castLink = memberPath => {
-    return config
-      ? config.secure_base_url + config.poster_sizes[1] + memberPath
-      : "";
-  };
+  const posterLink = config ? config.secure_base_url + config.poster_sizes[3] + props.details.poster_path || props.details.backdrop_path : "";
+  const castLink = memberPath => config ? config.secure_base_url + config.poster_sizes[1] + memberPath : "";
 
-  const pathTrailColor = rating => {
-    return rating >= 7
-      ? `rgba(19, 197, 37, ${(rating * 10) / 100})`
-      : `rgba(255, 230, 0, ${(rating * 10) / 100})`;
-  };
-  const trailColor = rating => {
-    return rating >= 7
-      ? `rgba(6, 59, 11, ${(rating * 10) / 100})`
-      : `rgba(124, 113, 12, ${(rating * 10) / 100})`;
-  };
+  const pathTrailColor = rating => rating >= 7 ? `rgba(19, 197, 37, ${(rating * 10) / 100})` : `rgba(255, 230, 0, ${(rating * 10) / 100})`;
+  const trailColor = rating => rating >= 7 ? `rgba(6, 59, 11, ${(rating * 10) / 100})` : `rgba(124, 113, 12, ${(rating * 10) / 100})`;
 
   const circularRatingBar = (
     <ChangingProgressProvider values={[0, props.details.vote_average * 10]}>
@@ -98,9 +75,7 @@ const ItemDetailsHeader = props => {
             <DetectBrowser>
               {({ browser }) =>
                 browser ? (
-                  <tspan
-                    dy={browser.name === ("edge" || "safari" || "ios") ? 8 : 2}
-                  >
+                  <tspan dy={browser.name === ("edge" || "safari" || "ios") ? 8 : 2}>
                     {props.details.vote_average * 10}%
                   </tspan>
                 ) : (
@@ -114,18 +89,10 @@ const ItemDetailsHeader = props => {
     </ChangingProgressProvider>
   );
 
-  const runTime =
-    props.details.runtime ||
-    (props.details.episode_run_time ? props.details.episode_run_time[0] : "") ||
-    "";
+  const runTime = props.details.runtime || (props.details.episode_run_time ? props.details.episode_run_time[0] : "") || "";
   const language = props.details.original_language;
 
-  const imageSource = item => {
-    return config
-      ? config.secure_base_url + config.poster_sizes[0] + item.poster_path ||
-          item.backdrop_path
-      : "";
-  };
+  const imageSource = item => config ? config.secure_base_url + config.poster_sizes[0] + item.poster_path || item.backdrop_path : "";
 
   return (
     <div className="itemdetail-mainheader">
@@ -140,14 +107,7 @@ const ItemDetailsHeader = props => {
                 <div className="itemdetail-header-text">
                   <div className="itemdetail-title">
                     <h2>{props.details.name || props.details.title}</h2>
-                    <h4>
-                      (
-                      {dayjs(
-                        props.details.release_date ||
-                          props.details.first_air_date
-                      ).format("YYYY")}
-                      )
-                    </h4>
+                    <h4>{dayjs(props.details.release_date || props.details.first_air_date).format("YYYY")}</h4>
                   </div>
                   <div className="itemdetail-trailer-link">
                     <div className="rating-element">
@@ -202,8 +162,7 @@ const ItemDetailsHeader = props => {
                     <div className="itemdetail-header-crew">
                       <h4>Featured Crew</h4>
                       <div className="itemdetail-header-crew-members">
-                        {props.credits.crew.map(
-                          (member, i) =>
+                        {props.credits.crew.map((member, i) =>
                             i < 3 && (
                               <div key={i}>
                                 <h6>{member.name}</h6>
@@ -232,16 +191,11 @@ const ItemDetailsHeader = props => {
                         Top Billed Cast
                       </h4>
                       <div className="itemdetail-cast-members">
-                        {props.credits.cast.map(
-                          (member, i) =>
+                        {props.credits.cast.map((member, i) =>
                             i < 5 && (
                               <div className="cast-card" key={i}>
                                 <div>
-                                  <img
-                                    className="cast-profile"
-                                    src={castLink(member.profile_path)}
-                                    alt=""
-                                  />
+                                  <img className="cast-profile" src={castLink(member.profile_path)} alt=""/>
                                 </div>
                                 <div className="cast-text">
                                   <h6>{member.name}</h6>
@@ -260,27 +214,24 @@ const ItemDetailsHeader = props => {
                     <div className="review-title">
                       <h4 style={{ display: "flex" }}>
                         Reviews{" "}
-                        {props.reviews.results.length > 2
-                          ? "2"
-                          : props.reviews.results.length}
+                        {props.reviews.results.length > 2 ? "2" : props.reviews.results.length}
                       </h4>
                       <div className="itemdetail-reviews-items">
-                        {props.reviews.results.map(
-                          (item, i) =>
-                            i < 2 && (
-                              <div className="review-card" key={i}>
-                                <div className="review-text">
-                                  <p>
-                                    "
-                                    {item.content.length > 1000
-                                      ? `${item.content.substring(0, 1000)}...`
-                                      : item.content}
-                                    "
-                                  </p>
-                                  <span>- {item.author}</span>
-                                </div>
+                        {props.reviews.results.map((item, i) =>
+                          i < 2 && (
+                            <div className="review-card" key={i}>
+                              <div className="review-text">
+                                <p>
+                                  "
+                                  {item.content.length > 1000
+                                    ? `${item.content.substring(0, 1000)}...`
+                                    : item.content}
+                                  "
+                                </p>
+                                <span>- {item.author}</span>
                               </div>
-                            )
+                            </div>
+                          )
                         )}
                       </div>
                     </div>
@@ -309,9 +260,7 @@ const ItemDetailsHeader = props => {
                       <CardItem
                         item={props.recommendations.results[0]}
                         type={props.type}
-                        pathcolor={pathTrailColor(
-                          props.recommendations.results[0].vote_average
-                        )}
+                        pathcolor={pathTrailColor(props.recommendations.results[0].vote_average)}
                         image={imageSource(props.recommendations.results[0])}
                       />
                     )}
@@ -322,29 +271,17 @@ const ItemDetailsHeader = props => {
             <section className="section-two">
               <div className="itemdetail-social-icons">
                 {props.social.twitter_id && (
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://www.twitter.com/${props.social.twitter_id}`}
-                  >
+                  <a target="_blank" rel="noopener noreferrer" href={`https://www.twitter.com/${props.social.twitter_id}`}>
                     <i className="fab fa-twitter-square" />
                   </a>
                 )}
                 {props.social.facebook_id && (
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://www.facebook.com/${props.social.facebook_id}`}
-                  >
+                  <a target="_blank" rel="noopener noreferrer"href={`https://www.facebook.com/${props.social.facebook_id}`}>
                     <i className="fab fa-facebook-square" />
                   </a>
                 )}
                 {props.social.instagram_id && (
-                  <a
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    href={`https://www.facebook.com/${props.social.instagram_id}`}
-                  >
+                  <a target="_blank" rel="noopener noreferrer" href={`https://www.facebook.com/${props.social.instagram_id}`}>
                     <i className="fab fa-instagram" />
                   </a>
                 )}
@@ -352,11 +289,7 @@ const ItemDetailsHeader = props => {
                   <span>
                     <p>
                       <span style={{ opacity: "0.3" }}> |</span>
-                      <a
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        href={`${props.details.homepage}`}
-                      >
+                      <a target="_blank" rel="noopener noreferrer" href={`${props.details.homepage}`}>
                         <i className="fas fa-link fa-sm" />
                       </a>
                     </p>
@@ -372,9 +305,7 @@ const ItemDetailsHeader = props => {
                 <div className="itemdetail-release-date">
                   <h6>Release Date</h6>
                   <p>
-                    {dayjs(
-                      props.details.release_date || props.details.first_air_date
-                    ).format("MMMM D, YYYY")}
+                    {dayjs(props.details.release_date || props.details.first_air_date).format("MMMM D, YYYY")}
                   </p>
                 </div>
                 <div className="itemdetail-language">

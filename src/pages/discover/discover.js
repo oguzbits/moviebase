@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import Loader from "react-loader";
+import { Dropdown } from "semantic-ui-react";
 
 import CardItem from "../../components/cardItem/cardItem";
-
 import NavBar from "../../components/navBar/navBar";
 import Footer from "../../components/footer/footer";
-
 import setItemType from "../../actions/setItemType";
 import getDiscover from "../../actions/getDiscover";
-
 import { options } from "../../components/discoverForms/popularity";
 import keyword_ids from "../../components/discoverForms/keyword_ids.json";
-
-import { Dropdown } from "semantic-ui-react";
 import Pagination from "../../components/pagination";
 
 import "react-circular-progressbar/dist/styles.css";
@@ -93,19 +89,11 @@ const Discover = props => {
     return yearList.reverse().map(year => ({ text: year, value: year }));
   };
 
-  const pathTrailColor = rating => {
-    return rating >= 7
-      ? `rgba(16, 138, 26, ${(rating * 10) / 100})`
-      : `rgba(255, 194, 25, ${(rating * 10) / 100})`;
-  };
+  const pathTrailColor = rating => rating >= 7 ? `rgba(16, 138, 26, ${(rating * 10) / 100})` : `rgba(255, 194, 25, ${(rating * 10) / 100})`;
 
   const config = props.MDBConfig.images;
-  const imageSource = item => {
-    return config
-      ? config.secure_base_url + config.poster_sizes[0] + item.poster_path ||
-          item.backdrop_path
-      : "";
-  };
+  const imageSource = item => config ? config.secure_base_url + config.poster_sizes[0] + item.poster_path || item.backdrop_path : "";
+
   return (
     <main>
       <Loader loaded={props.discover.loaded}>
@@ -115,28 +103,10 @@ const Discover = props => {
             <h1>DISCOVER</h1>
             <hr />
             <div className="discover-subheader">
-              <h3
-                id="header-movies"
-                style={{
-                  textDecoration: itemType === "TV" ? "" : "underline"
-                }}
-                onClick={() => {
-                  props.setItemType("MOVIE");
-                  setPage(1);
-                }}
-              >
+              <h3 id="header-movies" style={{ textDecoration: itemType === "TV" ? "" : "underline" }} onClick={() => { props.setItemType("MOVIE"); setPage(1); }}>
                 Movies
               </h3>
-              <h3
-                id="header-tvshows"
-                style={{
-                  textDecoration: itemType === "TV" ? "underline" : ""
-                }}
-                onClick={() => {
-                  props.setItemType("TV");
-                  setPage(1);
-                }}
-              >
+              <h3 id="header-tvshows" style={{ textDecoration: itemType === "TV" ? "underline" : "" }} onClick={() => { props.setItemType("TV"); setPage(1); }}>
                 TV Shows
               </h3>
             </div>
@@ -210,12 +180,7 @@ const Discover = props => {
                     imageSource(item) &&
                     item.overview && (
                       <div key={i}>
-                        <CardItem
-                          item={item}
-                          type={itemType}
-                          pathcolor={pathTrailColor(item.vote_average)}
-                          image={imageSource(item)}
-                        />
+                        <CardItem item={item} type={itemType} pathcolor={pathTrailColor(item.vote_average)} image={imageSource(item)}/>
                       </div>
                     )
                 )
@@ -227,12 +192,7 @@ const Discover = props => {
             </div>
           </main>
           <div className="discover-pagination">
-            <Pagination
-              itemsCount={200}
-              pageSize={20}
-              currentPage={page}
-              onPageChange={page => setPage(page)}
-            />
+            <Pagination itemsCount={200} pageSize={20} currentPage={page} onPageChange={page => setPage(page)}/>
           </div>
         </div>
         <Footer />

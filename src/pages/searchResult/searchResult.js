@@ -2,11 +2,9 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import dayjs from "dayjs";
-
 import Fade from "react-reveal/Fade";
 
 import searchData from "../../actions/searchData";
-
 import NavBar from "../../components/navBar/navBar";
 
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
@@ -23,19 +21,11 @@ const SearchResult = props => {
   // eslint-disable-next-line
   }, [apiKey, params]);
 
-  const pathTrailColor = rating => {
-    return rating >= 7
-      ? `rgba(24, 201, 39, ${(rating * 10) / 100})`
-      : `rgba(255, 208, 0, ${(rating * 10) / 100})`;
-  };
+  const pathTrailColor = rating => rating >= 7 ? `rgba(24, 201, 39, ${(rating * 10) / 100})` : `rgba(255, 208, 0, ${(rating * 10) / 100})`;
 
   const config = props.MDBConfig.images;
-  const imageSource = item => {
-    return config
-      ? config.secure_base_url + config.poster_sizes[0] + item.poster_path ||
-          item.backdrop_path
-      : "";
-  };
+  const imageSource = item => config ? config.secure_base_url + config.poster_sizes[0] + item.poster_path || item.backdrop_path : "";
+
   return (
     <div>
       <NavBar />
@@ -52,21 +42,10 @@ const SearchResult = props => {
                   item =>
                     imageSource(item) &&
                     item.media_type === ("movie" || "tv") && (
-                      <Link
-                        to={`/details/${item.media_type.toLowerCase()}/${
-                          item.id
-                        }`}
-                        key={item.id}
-                        id="card-container"
-                        className="card"
-                      >
+                      <Link  to={`/details/${item.media_type.toLowerCase()}/${item.id}`} key={item.id} id="card-container" className="card">
                         <div id="card-grid">
                           <div className="card">
-                            <img
-                              src={imageSource(item)}
-                              className="card-img"
-                              alt="..."
-                            />
+                            <img src={imageSource(item)} className="card-img" alt="..."/>
                           </div>
                           <div className="card">
                             <div className="card-body">
@@ -96,30 +75,14 @@ const SearchResult = props => {
                                 </div>
                                 <div>{item.title || item.name}</div>
                               </div>
-                              <p
-                                className="card-text"
-                                style={
-                                  ({ minHeight: "85px" }, { maxHeight: "85px" })
-                                }
-                              >
-                                {item.overview.length > 200
-                                  ? `${item.overview.substring(0, 200)}...`
-                                  : item.overview}
+                              <p className="card-text">
+                                {item.overview}
                               </p>
                             </div>
-                            <div
-                              id="footer-container"
-                              className={
-                                item.vote_average >= 7
-                                  ? "card-footer text-muted border-success"
-                                  : "card-footer text-muted border-warning"
-                              }
-                            >
+                            <div id="footer-container" className={item.vote_average >= 7 ? "card-footer text-muted border-success" : "card-footer text-muted border-warning"}>
                               <div className="card-footer">
                                 <small className="text-muted">
-                                  {dayjs(
-                                    item.release_date || item.first_air_date
-                                  ).format("MMMM D, YYYY")}
+                                  {dayjs(item.release_date || item.first_air_date).format("MMMM D, YYYY")}
                                 </small>
                               </div>
                             </div>

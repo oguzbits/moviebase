@@ -7,11 +7,7 @@ const LandingHeader = props => {
   const handleGetGenre = genreId => {
     let mainGenre;
     if (props.movieGenres.genres) {
-      props.movieGenres.genres.forEach(genre => {
-        if (genre.id === genreId[0]) {
-          mainGenre = genre.name;
-        }
-      });
+      props.movieGenres.genres.forEach(genre => { if (genre.id === genreId[0]) mainGenre = genre.name; });
       return mainGenre;
     }
   };
@@ -19,10 +15,7 @@ const LandingHeader = props => {
   const config = props.MDBConfig;
 
   return (
-    <div
-      id="carouselExampleCaptions"
-      className="carousel slide carousel-fade"
-      data-ride="carousel">
+    <div id="carouselExampleCaptions" className="carousel slide carousel-fade" data-ride="carousel">
       <ol className="carousel-indicators">
         <li
           data-target="#carouselExampleCaptions"
@@ -33,7 +26,6 @@ const LandingHeader = props => {
       </ol>
       <div className="carousel-inner">
         {props.items.map((item, i) => {
-          // if (i < 3) {
           if (i > 3 && i < 7) {
             return (
               <Link
@@ -41,17 +33,7 @@ const LandingHeader = props => {
                 key={item.id}
                 data-interval="8000"
                 className={i === 4 ? "carousel-item active" : "carousel-item"}>
-                <img
-                  src={
-                    config.images
-                      ? config.images.secure_base_url +
-                        config.images.backdrop_sizes[2] +
-                        item.backdrop_path
-                      : ""
-                  }
-                  className="d-block w-100"
-                  alt=""
-                />
+                <img src={config.images ? config.images.secure_base_url + config.images.backdrop_sizes[2] + item.backdrop_path : ""} className="d-block w-100" alt=""/>
                 <div className="carousel-caption">
                   <h2>{item.title || item.name}</h2>
                   <p>
