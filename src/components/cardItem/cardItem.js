@@ -3,6 +3,7 @@ import DetectBrowser from "react-detect-browser";
 import dayjs from "dayjs";
 import { Link } from "react-router-dom";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import fallbackImage from '../../images/fallback.png';
 
 import "react-circular-progressbar/dist/styles.css";
 import "./cardItem.scss";
@@ -15,7 +16,7 @@ const CardItem = (props) => {
     <Link to={`/details/${type.toLowerCase()}/${item.id}`} key={item.id} id="card-container" className="card">
       <div id="card-grid">
         <div className="card">
-          <img src={image} className="card-img" alt="..." />
+          <img src={image} className="card-img" alt="..." onError={(e) => e.target.src = fallbackImage}/>
         </div>
         <div className="card">
           <div className="card-body">
